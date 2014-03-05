@@ -4,6 +4,12 @@ from flask import request
 import sqlite3
 app = Flask(__name__)
 
+def rm_lines(input):
+  results = []
+  for row in input:
+    results.append([row[0], row[1].replace("\n",""), row[2], row[3], row[4], row[5], row[6]])
+  return results
+
 @app.route("/")
 def index():
 
@@ -21,9 +27,10 @@ def index():
     if row[2] != None and row[3] != None:
       found += 1
       results.append(row)
-
+  results = rm_lines(results)
   return render_template('index.html', results=results, count=count, max_lat=max_lat, max_lng=max_lng, min_lat=min_lat, min_lng=min_lng, found=found)
 
 if __name__ == "__main__":
   app.debug = True
   app.run()
+

@@ -88,16 +88,16 @@
   var markers = [];
 
 
-
   {% for result in results %}
-    markers.push(L.circleMarker([{{ result[2] }}, {{ result[3] }}], {
+    // "{{ result[1].strip('\n') }}"
+    markers.push(L.circleMarker([{{ result[3] }}, {{ result[4] }}], {
       radius: 4,
       color: 'rgb(0,162,220)',
       weight: 1,
       fill:true,
       fillColor: 'rgb(0,172,238)',
       fillOpacity: 0.5
-    }).addTo(map));
+    }).bindPopup("{{ result[1].strip('\n') }}").addTo(map));
   {% endfor %}
 
   map.fitBounds(bounds);
