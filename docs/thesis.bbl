@@ -1,0 +1,61 @@
+\begin{thebibliography}{1}
+
+\bibitem{bentley1975multidimensional}
+Jon~Louis Bentley.
+\newblock Multidimensional binary search trees used for associative searching.
+\newblock {\em Communications of the ACM}, 18(9):509--517, 1975.
+
+\bibitem{cheng2010you}
+Zhiyuan Cheng, James Caverlee, and Kyumin Lee.
+\newblock You are where you tweet: a content-based approach to geo-locating
+  twitter users.
+\newblock In {\em Proceedings of the 19th ACM international conference on
+  Information and knowledge management}, pages 759--768. ACM, 2010.
+
+\bibitem{hiruta2012detection}
+Shinya Hiruta, Takuro Yonezawa, Marko Jurmu, and Hideyuki Tokuda.
+\newblock Detection, classification and visualization of place-triggered
+  geotagged tweets.
+\newblock In {\em Proceedings of the 2012 ACM Conference on Ubiquitous
+  Computing}, pages 956--963. ACM, 2012.
+
+\bibitem{kinsella2011m}
+Sheila Kinsella, Vanessa Murdock, and Neil O'Hare.
+\newblock I'm eating a sandwich in glasgow: modeling locations with tweets.
+\newblock In {\em Proceedings of the 3rd international workshop on Search and
+  mining user-generated contents}, pages 61--68. ACM, 2011.
+
+\bibitem{nakaji2012visualization}
+Yusuke Nakaji and Keiji Yanai.
+\newblock Visualization of real-world events with geotagged tweet photos.
+\newblock In {\em Multimedia and Expo Workshops (ICMEW), 2012 IEEE
+  International Conference on}, pages 272--277. IEEE, 2012.
+
+\bibitem{paradesi2011geotagging}
+Sharon~Myrtle Paradesi.
+\newblock Geotagging tweets using their content.
+\newblock In {\em FLAIRS Conference}, 2011.
+
+\bibitem{ponte1998language}
+Jay~M Ponte and W~Bruce Croft.
+\newblock A language modeling approach to information retrieval.
+\newblock In {\em Proceedings of the 21st annual international ACM SIGIR
+  conference on Research and development in information retrieval}, pages
+  275--281. ACM, 1998.
+
+\bibitem{roller2012supervised}
+Stephen Roller, Michael Speriosu, Sarat Rallapalli, Benjamin Wing, and Jason
+  Baldridge.
+\newblock Supervised text-based geolocation using language models on an
+  adaptive grid.
+\newblock In {\em Proceedings of the 2012 Joint Conference on Empirical Methods
+  in Natural Language Processing and Computational Natural Language Learning},
+  pages 1500--1510. Association for Computational Linguistics, 2012.
+
+\bibitem{yanai2012world}
+Keiji Yanai.
+\newblock World seer: a realtime geo-tweet photo mapping system.
+\newblock In {\em Proceedings of the 2nd ACM International Conference on
+  Multimedia Retrieval}, page~65. ACM, 2012.
+
+\end{thebibliography}
