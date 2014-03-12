@@ -2,7 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2013)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: plain.bst
-Illegal, another \bibstyle command---line 22 of file thesis.aux
+Illegal, another \bibstyle command---line 23 of file thesis.aux
  : \bibstyle
  :          {plain}
 I'm skipping whatever remains of this command

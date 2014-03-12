@@ -36,6 +36,12 @@ This thesis will focus specifically on classifying text to a variety of regions,
 
 
 \chapter{Data and Preprocessing}
+\section{Data}
+
+Data was collected from the Twitter API by querying their streaming API for all tweets with an attached pair of geographic coordinates or an attached geofenced region. Tweets with a region attached were assigned the midpoint of the region. A program, running on a personal computer would run for a period of time downloading new tweets during that period and storing them in a database. 
+
+The dataset is comprised of 1,656,146 tweets with 612,728 unique users tweeting within that period.
+
 
 \chapter{Methods of Classification}
 

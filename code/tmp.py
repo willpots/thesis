@@ -2,7 +2,7 @@ from TwitterAPI import TwitterAPI
 import sqlite3
 import json
 import time
-
+import datetime
 conn = sqlite3.connect('twitter.db')
 
 api = TwitterAPI("iokZ57Ny54BEySHgmESw", "gfh2kYfU2m4QpqCiBoG6WXyUHcyqpPE8hTw6dJYCs", "114476085-bmsz96mDcyvrGrKHL69VXdZqwIxyqw1nLUWogrDu", "MLDro8JlXk4al5WOof2ms9J4vI0IZP5JeAYQSXvpNIWVS")
@@ -43,8 +43,10 @@ try:
               count += 1
             lat /= count
             lng /= count
+          a_time = time.mktime(time.strptime(item["created_at"], "%a %b %d %H:%M:%S +0000 %Y"))
+          seconds = int(a_time)
           print ("%.2fs" % (time.time() - start)), ("Lang: "+lang), ("Count: " + str(counted)), (str(geofence) +" vs. " + str(no_geofence)),"\n", lat, lng, "\n", body
-          c.execute("INSERT INTO tweets VALUES (?, ?, ?, ?, ?, ?, ?)", (body, lang, lat, lng, user_id, tweet_id, raw, ))
+          c.execute("INSERT INTO tweets VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (None,body, lang, lat, lng, user_id, tweet_id, raw, seconds, ))
           conn.commit()
 except KeyboardInterrupt:
   print "\n"

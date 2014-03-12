@@ -97,7 +97,7 @@
       fill:true,
       fillColor: 'rgb(0,172,238)',
       fillOpacity: 0.5
-    }).bindPopup("{{ result[1].strip('\n') }}").addTo(map));
+    }).addTo(map));
   {% endfor %}
 
   map.fitBounds(bounds);
