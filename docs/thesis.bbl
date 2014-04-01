@@ -1,4 +1,20 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{twitterabout}
+About twitter, inc. | about.
+\newblock \url{https://about.twitter.com/company}.
+\newblock (Visited on 03/20/2014).
+
+\bibitem{facebookabout}
+Company info | facebook newsroom.
+\newblock \url{https://newsroom.fb.com/company-info/}.
+\newblock (Visited on 03/20/2014).
+
+\bibitem{businessinsider}
+Smartphone and tablet penetration - business insider.
+\newblock
+  \url{http://www.businessinsider.com/smartphone-and-tablet-penetration-2013-10}.
+\newblock (Visited on 03/20/2014).
 
 \bibitem{bentley1975multidimensional}
 Jon~Louis Bentley.

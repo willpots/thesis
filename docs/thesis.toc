@@ -1,8 +1,11 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}
-\contentsline {chapter}{\numberline {2}Exploring the uses of Geotagged Social Media}{2}
-\contentsline {chapter}{\numberline {3}Data and Preprocessing}{3}
-\contentsline {section}{\numberline {3.1}Data}{3}
-\contentsline {chapter}{\numberline {4}Methods of Classification}{4}
-\contentsline {chapter}{\numberline {5}Examples/Results}{5}
-\contentsline {chapter}{\numberline {6}Conclusion}{6}
-\contentsline {chapter}{Bibliography}{7}
+\contentsline {section}{\numberline {1.1}Classification of Social Media}{1}
+\contentsline {section}{\numberline {1.2}Smartphones and Geotagging}{1}
+\contentsline {chapter}{\numberline {2}Data and Preprocessing}{5}
+\contentsline {section}{\numberline {2.1}Data}{5}
+\contentsline {section}{\numberline {2.2}Labels}{5}
+\contentsline {section}{\numberline {2.3}Preprocessing}{6}
+\contentsline {chapter}{\numberline {3}Methods of Classification}{7}
+\contentsline {chapter}{\numberline {4}Examples/Results}{8}
+\contentsline {chapter}{\numberline {5}Conclusion}{9}
+\contentsline {chapter}{Bibliography}{10}

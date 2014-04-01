@@ -2,50 +2,53 @@ This is BibTeX, Version 0.99d (TeX Live 2013)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: plain.bst
-Illegal, another \bibstyle command---line 23 of file thesis.aux
+Illegal, another \bibstyle command---line 26 of file thesis.aux
  : \bibstyle
  :          {plain}
 I'm skipping whatever remains of this command
 Database file #1: sources.bib
-You've used 9 entries,
+Warning--to sort, need author or key in facebookabout
+Warning--to sort, need author or key in twitterabout
+Warning--to sort, need author or key in businessinsider
+You've used 12 entries,
             2118 wiz_defined-function locations,
-            550 strings with 5915 characters,
-and the built_in function-call counts, 3872 in all, are:
-= -- 410
-> -- 134
+            560 strings with 6249 characters,
+and the built_in function-call counts, 4378 in all, are:
+= -- 461
+> -- 137
 < -- 7
-+ -- 54
++ -- 57
 - -- 44
-* -- 228
-:= -- 570
-add.period$ -- 34
-call.type$ -- 9
-change.case$ -- 49
+* -- 243
+:= -- 629
+add.period$ -- 43
+call.type$ -- 12
+change.case$ -- 58
 chr.to.int$ -- 0
-cite$ -- 9
-duplicate$ -- 182
-empty$ -- 333
+cite$ -- 15
+duplicate$ -- 203
+empty$ -- 402
 format.name$ -- 44
-if$ -- 890
+if$ -- 1016
 int.to.chr$ -- 0
-int.to.str$ -- 9
+int.to.str$ -- 12
 missing$ -- 9
-newline$ -- 48
+newline$ -- 63
 num.names$ -- 18
-pop$ -- 73
+pop$ -- 103
 preamble$ -- 1
-purify$ -- 40
+purify$ -- 46
 quote$ -- 0
-skip$ -- 135
+skip$ -- 149
 stack$ -- 0
-substring$ -- 267
-swap$ -- 76
+substring$ -- 282
+swap$ -- 79
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 36
-warning$ -- 0
+type$ -- 48
+warning$ -- 3
 while$ -- 39
-width$ -- 10
-write$ -- 107
+width$ -- 14
+write$ -- 134
 (There was 1 error message)
