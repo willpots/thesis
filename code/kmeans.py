@@ -20,7 +20,7 @@ def get_label(lat, lng):
   newlng = round((lng + 180) / 5)
   # 0 to 36
   newlat = round((lat + 90) / 5)
-
+  return str(int(newlat))+"-"+str(int(newlng))
 K = 10
 
 train_tweets = []
@@ -30,13 +30,16 @@ test_labels = []
 centers = []
 conn = sqlite3.connect('twitter.db')
 c = conn.cursor()
-for row in c.execute("SELECT * FROM tweets LIMIT 10000"):
+# for row in c.execute("SELECT * FROM tweets LIMIT 10000"):
+for row in c.execute("SELECT * FROM tweets LIMIT 100"):
   if row[3] != None and row[4] != None:
     train_tweets.append(row[1])
     train_labels.append(get_label(row[3], row[4]))
-for row in c.execute("SELECT * FROM tweets LIMIT 2000 OFFSET 10000"):
+# for row in c.execute("SELECT * FROM tweets LIMIT 2000 OFFSET 10000"):
+for row in c.execute("SELECT * FROM tweets LIMIT 100 OFFSET 100"):
   if row[3] != None and row[4] != None:
     test_tweets.append(row[1])
+    print get_label(row[3], row[4])
     test_labels.append(get_label(row[3], row[4]))
 
 # vectorizer = CountVectorizer(min_df=1)
@@ -54,14 +57,11 @@ train_data = vectorizer.fit_transform(train_tweets)
 print "Vectorizing Testing Data..."
 test_data = vectorizer.transform(test_tweets)
 for k,cluster in clusters.items():
+  print "Testing",k,"clusters..."
   print "Training Cluster Data..."
   cluster.fit(train_data) 
   print "Testing Cluster Data..."
-  print cluster.predict(test_data)
-  print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels, km.labels_))
-  print("Completeness: %0.3f" % metrics.completeness_score(labels, km.labels_))
-  print("V-measure: %0.3f" % metrics.v_measure_score(labels, km.labels_))
-  print("Adjusted Rand-Index: %.3f"
-        % metrics.adjusted_rand_score(labels, km.labels_))
-  print("Silhouette Coefficient: %0.3f"
-        % metrics.silhouette_score(X, labels, sample_size=1000))
+  results = cluster.predict(test_data)
+  # for i,v in enumerate(results):
+    # print results[i], test_labels[i]
+  print cluster.labels_
