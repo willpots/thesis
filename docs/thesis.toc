@@ -1,11 +1,23 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Classification of Social Media}{1}
 \contentsline {section}{\numberline {1.2}Smartphones and Geotagging}{1}
-\contentsline {chapter}{\numberline {2}Data and Preprocessing}{5}
-\contentsline {section}{\numberline {2.1}Data}{5}
-\contentsline {section}{\numberline {2.2}Labels}{5}
-\contentsline {section}{\numberline {2.3}Preprocessing}{6}
-\contentsline {chapter}{\numberline {3}Methods of Classification}{7}
-\contentsline {chapter}{\numberline {4}Examples/Results}{8}
-\contentsline {chapter}{\numberline {5}Conclusion}{9}
-\contentsline {chapter}{Bibliography}{10}
+\contentsline {chapter}{\numberline {2}Related Work}{5}
+\contentsline {chapter}{\numberline {3}Data and Preprocessing}{7}
+\contentsline {section}{\numberline {3.1}Data}{7}
+\contentsline {section}{\numberline {3.2}Preprocessing}{7}
+\contentsline {section}{\numberline {3.3}Labeling}{8}
+\contentsline {chapter}{\numberline {4}Experimental Methods}{9}
+\contentsline {section}{\numberline {4.1}Posing the question as a classification problem}{9}
+\contentsline {section}{\numberline {4.2}Scope}{9}
+\contentsline {section}{\numberline {4.3}Labels}{9}
+\contentsline {subsection}{\numberline {4.3.1}Geographic Grid Regions}{9}
+\contentsline {subsection}{\numberline {4.3.2}Political Boundaries}{10}
+\contentsline {subsection}{\numberline {4.3.3}N-sized Example Buckets}{10}
+\contentsline {section}{\numberline {4.4}Data Training and Testing Protocols}{11}
+\contentsline {subsection}{\numberline {4.4.1}Randomness and Cross Validation}{11}
+\contentsline {section}{\numberline {4.5}Supervised Learning Models}{11}
+\contentsline {subsection}{\numberline {4.5.1}K-Nearest Neighbor}{11}
+\contentsline {subsection}{\numberline {4.5.2}Naive Bayes}{11}
+\contentsline {chapter}{\numberline {5}Examples/Results}{12}
+\contentsline {chapter}{\numberline {6}Conclusion}{13}
+\contentsline {chapter}{Bibliography}{14}

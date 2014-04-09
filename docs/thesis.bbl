@@ -28,6 +28,19 @@ Zhiyuan Cheng, James Caverlee, and Kyumin Lee.
 \newblock In {\em Proceedings of the 19th ACM international conference on
   Information and knowledge management}, pages 759--768. ACM, 2010.
 
+\bibitem{fink2009geolocating}
+Clayton Fink, Christine~D Piatko, James Mayfield, Tim Finin, and Justin
+  Martineau.
+\newblock Geolocating blogs from their textual content.
+\newblock In {\em AAAI Spring Symposium: Social Semantic Web: Where Web 2.0
+  Meets Web 3.0}, pages 25--26, 2009.
+
+\bibitem{graham2013where}
+Mark Graham, Scott~A. Hale, and Devin Gaffney.
+\newblock Where in the world are you? geolocation and language identification
+  in twitter.
+\newblock {\em CoRR}, abs/1308.0683, 2013.
+
 \bibitem{hiruta2012detection}
 Shinya Hiruta, Takuro Yonezawa, Marko Jurmu, and Hideyuki Tokuda.
 \newblock Detection, classification and visualization of place-triggered
@@ -40,6 +53,19 @@ Sheila Kinsella, Vanessa Murdock, and Neil O'Hare.
 \newblock I'm eating a sandwich in glasgow: modeling locations with tweets.
 \newblock In {\em Proceedings of the 3rd international workshop on Search and
   mining user-generated contents}, pages 61--68. ACM, 2011.
+
+\bibitem{kwak2010twitter}
+Haewoon Kwak, Changhyun Lee, Hosung Park, and Sue Moon.
+\newblock What is twitter, a social network or a news media?
+\newblock In {\em Proceedings of the 19th international conference on World
+  wide web}, pages 591--600. ACM, 2010.
+
+\bibitem{lee2010uncovering}
+Kyumin Lee, James Caverlee, and Steve Webb.
+\newblock Uncovering social spammers: social honeypots+ machine learning.
+\newblock In {\em Proceedings of the 33rd international ACM SIGIR conference on
+  Research and development in information retrieval}, pages 435--442. ACM,
+  2010.
 
 \bibitem{nakaji2012visualization}
 Yusuke Nakaji and Keiji Yanai.
@@ -67,6 +93,28 @@ Stephen Roller, Michael Speriosu, Sarat Rallapalli, Benjamin Wing, and Jason
 \newblock In {\em Proceedings of the 2012 Joint Conference on Empirical Methods
   in Natural Language Processing and Computational Natural Language Learning},
   pages 1500--1510. Association for Computational Linguistics, 2012.
+
+\bibitem{Teitler:2008:NNV:1463434.1463458}
+Benjamin~E. Teitler, Michael~D. Lieberman, Daniele Panozzo, Jagan
+  Sankaranarayanan, Hanan Samet, and Jon Sperling.
+\newblock Newsstand: A new view on news.
+\newblock In {\em Proceedings of the 16th ACM SIGSPATIAL International
+  Conference on Advances in Geographic Information Systems}, GIS '08, pages
+  18:1--18:10, New York, NY, USA, 2008. ACM.
+
+\bibitem{thom2012spatiotemporal}
+Dennis Thom, Harald Bosch, Steffen Koch, Michael Worner, and Thomas Ertl.
+\newblock Spatiotemporal anomaly detection through visual analysis of
+  geolocated twitter messages.
+\newblock In {\em Pacific Visualization Symposium (PacificVis), 2012 IEEE},
+  pages 41--48. IEEE, 2012.
+
+\bibitem{wing2011simple}
+Benjamin~P Wing and Jason Baldridge.
+\newblock Simple supervised document geolocation with geodesic grids.
+\newblock In {\em Proceedings of the 49th Annual Meeting of the Association for
+  Computational Linguistics: Human Language Technologies-Volume 1}, pages
+  955--964. Association for Computational Linguistics, 2011.
 
 \bibitem{yanai2012world}
 Keiji Yanai.
