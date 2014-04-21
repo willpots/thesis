@@ -2,69 +2,26 @@ import sqlite3
 import random
 import numpy
 import pylab
-import lib
+
+# Don't clutter the damn namespace
+from lib import *
+from labels import *
+from metrics import *
+from db import DataManager
+
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.cluster import KMeans
 
-
-DB = "twitter.db"
-
+DATABASE = "us_twitter.db"
 
 # calculate document frequencies on whole data
 # pick the majority
 # pick based off the distributions
 
-def rand_lat():
-  return random.random() * 180 - 90
-
-def rand_lng():
-  return random.random() * 360 - 180
 
 
-def get_label(lat, lng):
-  # 0 to 36
-  newlng = round((lng + 180) / 2)
-  # 0 to 18
-  newlat = round((lat + 90) / 2)
-  return str(int(newlat))+"_"+str(int(newlng))
-
-
-def majority_accuracy(majority, labels):
-  total = 0.0
-  correct = 0.0
-  for i,v in enumerate(labels):
-    if majority == v:
-      correct += 1
-    total += 1
-  return correct / total
-
-def accuracy(results, labels):
-  total = 0.0
-  correct = 0.0
-  for i,v in enumerate(results):
-    if results[i] == labels[i]:
-      correct += 1
-    total += 1
-  return correct / total
-
-def majority_label(labels):
-  counts = {}
-  for label in labels:
-    if label in counts:
-      counts[label] += 1
-    else:
-      counts[label] = 1
-  max_label = None
-  max_value = -1
-  for label in counts:
-    if counts[label] > max_value:
-      max_value = counts[label]
-      max_label = label
-  return max_label, max_value
-
-K = 10
 
 split = 0.8
 
@@ -75,21 +32,8 @@ test_tweets = []
 test_labels = []
 centers = []
 unique_labels = {}
-# conn = sqlite3.connect('twitter.db')
-conn = sqlite3.connect(DB)
-
-c = conn.cursor()
-for row in c.execute("SELECT * FROM tweets ORDER BY RANDOM() LIMIT 10000"):
-# for row in c.execute("SELECT * FROM tweets LIMIT 100"):
-  if row[3] != None and row[4] != None:
-    num = random.random()
-    if num < split:
-      train_tweets.append(row[1])
-      train_labels.append(get_label(row[3], row[4]))
-      unique_labels[get_label(row[3], row[4])] = 1
-    else:
-      test_tweets.append(row[1])
-      test_labels.append(get_label(row[3], row[4]))
+db_mgr = DataManager(DATABASE)
+train_tweets, train_labels, test_tweets, test_labels = db_mgr.select_tweets(limit=10000, table="us_tweets", split=0.8, label=fips_label)
 print "Train Size:", len(train_tweets)
 print "Test Size:", len(test_tweets)
 
@@ -98,13 +42,18 @@ print "Test Size:", len(test_tweets)
 vectorizer = TfidfVectorizer(min_df=1)
 
 knns = {
-  "2": KNeighborsClassifier(n_neighbors=2),
-  "4": KNeighborsClassifier(n_neighbors=4),
-  "8": KNeighborsClassifier(n_neighbors=8),
-  "16": KNeighborsClassifier(n_neighbors=16),
-  "32": KNeighborsClassifier(n_neighbors=32),
-  "64": KNeighborsClassifier(n_neighbors=64),
-  "128": KNeighborsClassifier(n_neighbors=128)}
+  2: KNeighborsClassifier(n_neighbors=2),
+  4: KNeighborsClassifier(n_neighbors=4),
+  8: KNeighborsClassifier(n_neighbors=8),
+  20: KNeighborsClassifier(n_neighbors=20),
+  40: KNeighborsClassifier(n_neighbors=40),
+  80: KNeighborsClassifier(n_neighbors=80),
+  200: KNeighborsClassifier(n_neighbors=200),
+  400: KNeighborsClassifier(n_neighbors=400),
+  600: KNeighborsClassifier(n_neighbors=600),
+  800: KNeighborsClassifier(n_neighbors=800),
+  1000: KNeighborsClassifier(n_neighbors=1000),
+  2000: KNeighborsClassifier(n_neighbors=2000)}
 
 total_labels = 0
 for i,v in enumerate(unique_labels):
@@ -118,12 +67,9 @@ test_data = vectorizer.transform(test_tweets)
 maj_label, maj_count = majority_label(train_labels)
 print "Majority Label:", maj_label
 print "Majority Accuracy:", majority_accuracy(maj_label, test_labels)
-for k,knn in knns.items():
-  print "Testing",k,"neighbor model..."
+print("K\t, Train, Test")
+for k in sorted(knns):
+  knn = knns[k]
   knn.fit(train_data, train_labels) 
+  print k,"\t,","%.4f" % accuracy(knn.predict(train_data), train_labels),",", "%.4f" % accuracy(knn.predict(test_data), test_labels)
 
-  results = knn.predict(train_data)
-  print "Train Accuracy:", accuracy(results, train_labels)
-
-  results = knn.predict(test_data)
-  print "Test Accuracy:", accuracy(results, test_labels)
