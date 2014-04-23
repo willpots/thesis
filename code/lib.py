@@ -1,35 +1,42 @@
-class BoundingBox():
+import simplejson
+import json
+ 
+def put(data, filename):
+  try:
+    jsondata = simplejson.dumps(data, indent=2, skipkeys=True, sort_keys=True)
+    fd = open(filename, 'w')
+    fd.write(jsondata)
+    fd.close()
+  except:
+    print 'ERROR writing', filename
+    pass
+ 
+def get(filename):
 
-  def __init__(self,lat1,lng1,lat2,lng2):
-    if lat1 > lat2:
-      self.max_lat = lat1
-      self.min_lat = lat2
-    else:
-      self.max_lat = lat2
-      self.min_lat = lat1
-    if lng1 > lng2:
-      self.max_lng = lng1
-      self.min_lng = lng2
-    else:
-      self.max_lng = lng2
-      self.min_lng = lng1
+  with open(filename, 'r') as fd:
+    return json.load(fd)
+ 
+def ensure_results(k,obj):
+  if k not in obj:
+    obj[k] = {}
+  if "train_improvement" not in obj[k]:
+    obj[k]["train_improvement"] = []
+  if "test_improvement" not in obj[k]:
+    obj[k]["test_improvement"] = []
+  return obj
 
-
-  def contains(self, lat, lng):
-    if lat < self.max_lat and lat > self.min_lat and lng < self.max_lng and lng > self.min_lng:
-      return true
-    else:
-      return false
-
-
-# class Database():
-
-#   def __init__(self, filename):
-#     self.conn = sqlite3.connect(filename)
-
-
-#   def select(self, bounding_box=None):
-
-# class Dataset():
-#   def __init__(self, cursor):
-#     self.data = 
+def ensure_structure_and_append(obj,keys,value):
+  tmp = obj
+  for k in keys:
+    if k not in tmp:
+      tmp[k] = {}
+    tmp = tmp[k]
+  if isinstance(tmp, list):
+    tmp.append(value)
+  else:
+    tmp = obj
+    for i in range(0,len(keys)-1):
+      tmp = tmp[keys[i]]
+    last_key = keys[len(keys)-1]
+    tmp[last_key] = [value]
+  return obj

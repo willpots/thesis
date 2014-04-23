@@ -17,7 +17,14 @@
 \contentsline {subsection}{\numberline {4.4.1}Randomness and Cross Validation}{11}
 \contentsline {section}{\numberline {4.5}Supervised Learning Models}{11}
 \contentsline {subsection}{\numberline {4.5.1}K-Nearest Neighbor}{11}
-\contentsline {subsection}{\numberline {4.5.2}Naive Bayes}{11}
-\contentsline {chapter}{\numberline {5}Examples/Results}{12}
-\contentsline {chapter}{\numberline {6}Conclusion}{13}
-\contentsline {chapter}{Bibliography}{14}
+\contentsline {subsection}{\numberline {4.5.2}Naive Bayes}{12}
+\contentsline {chapter}{\numberline {5}Examples/Results}{13}
+\contentsline {section}{\numberline {5.1}Examples}{13}
+\contentsline {section}{\numberline {5.2}Results}{13}
+\contentsline {subsection}{\numberline {5.2.1}KNN/Grid Labeling Results}{13}
+\contentsline {subsection}{\numberline {5.2.2}State Boundary Results}{14}
+\contentsline {subsection}{\numberline {5.2.3}K-dimensional Tree Results}{14}
+\contentsline {subsection}{\numberline {5.2.4}Naive Bayes Results}{14}
+\contentsline {subsection}{\numberline {5.2.5}Discussion on Preprocessing}{14}
+\contentsline {chapter}{\numberline {6}Conclusion}{15}
+\contentsline {chapter}{Bibliography}{16}

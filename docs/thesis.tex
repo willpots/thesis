@@ -51,9 +51,9 @@ This thesis looks to examine the possibility of determining a user's location at
 
 While initial efforts target exclusively the body text of tweets, incorporating user information into classification should improve results. Accounting for the location of other tweets by the same user and the user's stated location in their settings should help influence the classification result especially if classification efforts narrowed it down to a small number of places. Additionally, using the time as a feature should help, as most people operate in regular cycles (daytime at a place of work or school, and nighttime at home).
 
-As many words bear certain significance to a particular geographic location, it can be expected that different types of words will have an effect on predicting the location of a tweet. At the simplest level, referring to place names, such as New York, Boston, or San Francisco, can be expected to have a correlation to the location of the tweeter. It may relate to something in the past (``Just got back from New York City...great weekend."), present (``I'm at New York Hilton Midtown - @hiltonhotels (New York, NY)"), future (``3 hours to go until New York will be calling! #fashion #opportunity #career"). The user may not even be planning to go to the place, but rather just is referencing the place (``If only New York wasn't so far away").
+As many words bear certain significance to a particular geographic location, it can be expected that different types of words will have an effect on predicting the location of a tweet. At the simplest level, referring to place names, such as New York, Boston, or San Francisco, can be expected to have a correlation to the location of the tweeter. It may relate to something in the past (``Just got back from New York City...great weekend."), present (``I'm at New York Hilton Midtown - @hiltonhotels (New York, NY)"), future (``3 hours to go until New York will be calling! \#fashion \#opportunity \#career"). The user may not even be planning to go to the place, but rather just is referencing the place (``If only New York wasn't so far away").
 
-Additionally, the use of neighboorhoods or other place names may indicate a geographic location. Tweets like ``I ❤️ SNOW #nyc @ Hell's Kitchen - NYC" refer to the Hell's Kitchen neighboorhood in NYC but tweets refer to other cultural features, like the TV show ``Hell's Kitchen": ``Literally can't get enough of @GordonRamsay `a Hell's Kitchen' - absolute stormer of a show, can't wait for the new series".
+Additionally, the use of neighboorhoods or other place names may indicate a geographic location. Tweets like ``I ❤️ SNOW \#nyc @ Hell's Kitchen - NYC" refer to the Hell's Kitchen neighboorhood in NYC but tweets refer to other cultural features, like the TV show ``Hell's Kitchen": ``Literally can't get enough of @GordonRamsay `a Hell's Kitchen' - absolute stormer of a show, can't wait for the new series".
 
 Finally, the presence of particular words, like ``frappe" and ``milkshake" may indicate if someone is in a particular location. Tweets with ``frappe" are less popular and appear in the Northeast mainly, while ``milkshake" appears more frequently and across a greater geographic area.
 
@@ -119,13 +119,59 @@ Additionally, to account for variation that might occur within 1 experiment, 10-
 
 K-Nearest Neighbor classification examines a set of training examples and using their features and internally stores them on an n-dimensional space. In our case, features are words or n-grams included in the body text of tweets. Then with a test example, the model identifies the K-nearest examples and chooses the majority label.
 
+In order to mitigate the risk of insignificant terms weighting the distance metrics for each example, a term frequency-inverse document frequency (TF-IDF) vectorizer can be used instead of a  normal count vector. TF-IDF vectors weight words that appear the most in a given document but negatively weight words that appear in many documents.
+
+
 \subsection{Naive Bayes}
 
+Using the Naive Bayes model for text classification introduces another method to improve accuracy. While an effective model, our data should be preprocessed to ignore many of the random noise words included in most tweets. With each ineffective term in the training set, the overall effectiveness of Naive Bayes decreases. When training on a toponym heavy dataset like Wikipedia, Naive Bayes can be quite effective.
 
 
 
 
 \chapter{Examples/Results}
+**Still in progress**
+\section{Examples}
+TODO: Find some interesting examples from testing
+
+\section{Results}
+\subsection{KNN/Grid Labeling Results}
+As shown in the table below, K-Nearest Neighbor increases accuracy with an increase in clusters. With both labeling schemes, they don't appear to improve beyond K values of 128. K values of 128 appear to slightly dominate choosing exclusively the majority label.
+
+
+
+\begin{table}
+\centering 
+  \begin{tabular}{| c | c | c |}
+  \hline
+  \multicolumn{3}{ |c| }{K-Nearest Neighbor Test Data Results} \\
+  \hline      
+  Labeling Grid: & 2$^{\circ}$ x2$^{\circ}$ &  10$^{\circ}$x10$^{\circ}$  \\
+  Unique Labels: & 623 & 139  \\
+  \hline                 
+  Majority  & 0.0632124352332  & 0.168604651163 \\
+  2 NN & 0.0103626943005 & 0.094476744186 \\
+  4 NN & 0.0129533678756 & \textbf{0.180717054264} \\
+  8 NN & 0.0150259067358 & 0.101259689922 \\
+  16 NN & 0.0290155440415 & 0.140988372093 \\
+  32 NN & 0.0461139896373 & \textbf{0.176356589147} \\
+  64 NN & 0.059067357513 & 0.132751937984 \\
+  128 NN & \textbf{0.0652849740933} & \textbf{0.171511627907} \\
+  256 NN & \textbf{0.0678756476684} & \textbf{0.184108527132} \\
+  512 NN & \textbf{0.0652849740933} & \textbf{0.179748062016} \\
+  \hline  
+  \end{tabular}
+
+\end{table}
+
+
+\subsection{State Boundary Results}
+\subsection{K-dimensional Tree Results}
+\subsection{Naive Bayes Results}
+
+\subsection{Discussion on Preprocessing}
+
+
 \chapter{Conclusion}
 
 

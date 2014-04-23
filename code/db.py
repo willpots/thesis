@@ -38,11 +38,18 @@ class DataManager():
       self.test_l = None
 
     query = "SELECT * FROM %s" % (table)
+    query += " WHERE id IS NOT NULL "
+    if "state_fips" in args and args["state_fips"] == True:
+      query += " AND fips IS NOT NULL"
+
+    if "county_fips" in args and args["county_fips"] == True:
+      query += " AND fips_county IS NOT NULL"
     if is_random == True:
       query += " ORDER BY RANDOM() "
     if limit != None:
       query += " LIMIT " + str(limit)
     c = self.conn.cursor()
+    print query
     for row in c.execute(query):
       num = random.random()
       if split != None and num > split:

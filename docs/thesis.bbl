@@ -67,6 +67,11 @@ Kyumin Lee, James Caverlee, and Steve Webb.
   Research and development in information retrieval}, pages 435--442. ACM,
   2010.
 
+\bibitem{FM4366}
+Kalev Leetaru, Shaowen Wang, Guofeng Cao, Anand Padmanabhan, and Eric Shook.
+\newblock Mapping the global twitter heartbeat: The geography of twitter.
+\newblock {\em First Monday}, 18(5), 2013.
+
 \bibitem{nakaji2012visualization}
 Yusuke Nakaji and Keiji Yanai.
 \newblock Visualization of real-world events with geotagged tweet photos.
@@ -94,7 +99,7 @@ Stephen Roller, Michael Speriosu, Sarat Rallapalli, Benjamin Wing, and Jason
   in Natural Language Processing and Computational Natural Language Learning},
   pages 1500--1510. Association for Computational Linguistics, 2012.
 
-\bibitem{Teitler:2008:NNV:1463434.1463458}
+\bibitem{teitler2002newsstand}
 Benjamin~E. Teitler, Michael~D. Lieberman, Daniele Panozzo, Jagan
   Sankaranarayanan, Hanan Samet, and Jon Sperling.
 \newblock Newsstand: A new view on news.

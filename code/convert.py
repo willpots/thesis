@@ -10,7 +10,7 @@ c = conn.cursor()
 # CREATE TABLE "raw_tweets" (id integer primary key not null, body text, lang text, lat real, lng real, user_id integer, tweet_id integer, time integer);
 # CREATE TABLE "tweets" (id integer primary key not null, body text, lang text, lat real, lng real, user_id integer, tweet_id integer, raw text, time integer);
 # CREATE TABLE "us_tweets" (id integer primary key not null, body text, lang text, lat real, lng real, user_id integer, tweet_id integer, time integer, fips integer);
-
+# ALTER TABLE "us_tweets" ADD COLUMN fips_county integer
 # (tweets)
 # (0  , 1    , 2    , 3   , 4   , 5       , 6        , 7   , 8    )
 # (id , body , lang , lat , lng , user_id , tweet_id , raw , time );
@@ -45,6 +45,6 @@ for row in c.execute("SELECT * FROM raw_tweets"):
         conn.commit()
   else:
     found += 1
-    print "Found", found, "tweet", row[6], "exists in db"
+    # print "Found", found, "tweet", row[6], "exists in db"
   # print chr(27) + "[2J"
 
