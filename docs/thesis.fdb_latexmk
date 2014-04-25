@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex thesis"] 1398092738 "thesis.aux" "thesis.bbl" "thesis" 1398092739
+["bibtex thesis"] 1398092738 "thesis.aux" "thesis.bbl" "thesis" 1398453973
   "/usr/local/texlive/2013/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "sources.bib" 1398092725 7912 216e2cb933550eca57231e7c58d7e9e5 ""
-  "thesis.aux" 1398092739 4032 e51412224ed34337e4c2dbc77ae4eb09 ""
+  "thesis.aux" 1398453935 4032 e51412224ed34337e4c2dbc77ae4eb09 ""
   "thesis.bcf" 0 -1 0 ""
   (generated)
   "thesis.blg"
   "thesis.bbl"
-["pdflatex"] 1398092738 "thesis.tex" "thesis.pdf" "thesis" 1398092739
+["pdflatex"] 1398453934 "thesis.tex" "thesis.pdf" "thesis" 1398453973
   "/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1335995445 7612 c47308d923ec19888707b0f1792b326a ""
   "/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/ifluatex.sty" 1303254447 7324 11d14f318d865f420e692d4e6c9c18c3 ""
@@ -31,13 +31,13 @@
   "/usr/local/texlive/2013/texmf-dist/tex/latex/pdftex-def/pdftex.def" 1306616590 55368 3c8a0d99822330f2dfabc0dfb09ce897 ""
   "/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1ptm.fd" 1137110629 961 15056f4a61917ceed3a44e4ac11fcc52 ""
   "/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/times.sty" 1156702453 857 6c716f26c5eadfb81029fcd6ce2d45e6 ""
-  "thesis.aux" 1398092739 4032 e51412224ed34337e4c2dbc77ae4eb09 ""
+  "thesis.aux" 1398453935 4032 e51412224ed34337e4c2dbc77ae4eb09 ""
   "thesis.bbl" 1398092738 5341 6baf935b54e14743805096c27fcdb20d "bibtex thesis"
   "thesis.cls" 1392048832 12086 e727ee12d4bc27839dd052a6addb11ab ""
-  "thesis.lof" 1398092739 120 4b5392bf4295ae9f4473a7a4fff7fdc5 ""
-  "thesis.lot" 1398092739 120 4b5392bf4295ae9f4473a7a4fff7fdc5 ""
-  "thesis.tex" 1397096224 20975 4dd7916b9198540f19738c4aaa8f9172 ""
-  "thesis.toc" 1398092739 1987 6e273e9a173ef9bad2a2578210857751 ""
+  "thesis.lof" 1398453935 120 4b5392bf4295ae9f4473a7a4fff7fdc5 ""
+  "thesis.lot" 1398453935 120 4b5392bf4295ae9f4473a7a4fff7fdc5 ""
+  "thesis.tex" 1398453934 21225 0e91d192d07587efce87f1131d07e19f ""
+  "thesis.toc" 1398453935 1987 6e273e9a173ef9bad2a2578210857751 ""
   (generated)
   "thesis.log"
   "thesis.toc"

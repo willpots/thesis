@@ -1,5 +1,3 @@
-
-
 def majority_accuracy(majority, labels):
   total = 0.0
   correct = 0.0

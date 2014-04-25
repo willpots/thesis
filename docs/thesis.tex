@@ -81,6 +81,7 @@ Data was collected from the Twitter API by querying their streaming API for all 
 
 The dataset is comprised of 1,656,146 tweets with 612,728 unique users tweeting within a period of February 13, 2014 and March 6th, 2014. This sample represents all geotagged, English-language tweets collected over random time intervals during the above period. Collection from the Twitter API occasionally times out, leaving gaps where tweets were not collected. As Twitter publishes approximately 500 million tweets per day, this dataset of 1.6 million represents a vast minority of tweets between the dates of collection, yet it still provides a significant number for running experiments.
 
+In addition to Twitter data, Wikipedia articles were used to provide another training base. Given the large number of place specific terms 
 \section{Preprocessing}
 Tweets tend to be informal and are filled with insignificant, popular words (``the", ``I", ``a") as well as a range of misspellings. In addition, tweets contain links and usernames that don't necessarily have a strong correlation to one's location. For this reason, simply counting each word as a feature is a naïve approach that introduces an unwanted amount of noise to classification experiments. Additionally, examining bigrams, or particular phrases, as opposed to simply looking at 1-gram words is expected to increase the accuracy of classification. The bigram, ``in Boston", is more likely to imply the user is actually in Boston compared to ``from Boston".
 
@@ -103,6 +104,8 @@ In running experiments, labels are derived from the geographic coordinates of a 
 
 \subsection{Political Boundaries}
 Using political boundaries or census designated places, as labels would be a slightly more intelligent way to break up the corpus of tweets, but still doesn't account for a large difference in population density. Breaking up a heavily populated state like Massachusetts or New Jersey into more buckets than Montana or Wyoming would give more authentic labels, due to the diversity and increased activity on social media. Additionally, latitude and longitude are often not the most effective ways of differentiating a population as cultural boundaries are often not straight lines.
+
+To simplify experiments, tweets outside of the 50 United States were discarded and each tweet was given a numeric FIPS (Federal Information Processing Standard) label corresponding to a state.
 
 \subsection{N-sized Example Buckets}
 Using a k-dimensional tree to break up tweets into n-sized buckets by their latitude and longitude, experiments will break the dataset into labels that more accurately represent population distribution across the planet. This method is similar to the work of Roller et al. \cite{roller2012supervised}, except it will train the model on tweets rather than Wikipedia data.

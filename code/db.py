@@ -1,6 +1,7 @@
 from labels import *
 import sqlite3
 import random
+from lib import *
 from sklearn import cross_validation
 
 class DataManager():
@@ -8,9 +9,23 @@ class DataManager():
     self.filename = name
     self.conn = sqlite3.connect(name)
 
+  def select_wikipedia_train(self, **args):
+    query = "SELECT body, state FROM wiki_articles"
+    if "limit" in args:
+      query += " ORDER BY RANDOM() LIMIT " + str(args["limit"])
+    c = self.conn.cursor()
+    train_b = []
+    train_l = []
+    count = 0
+    for row in c.execute(query):
+      train_b.append(row[0])
+      train_l.append(row[1])
+      count += 1
+    return train_b, train_l
 
   def select_tweets(self, **args):
-    print args
+    if "print" in args:
+      print args
     limit = args["limit"] or 1000
     table = args["table"] or "tweets"
     # cross_validation
@@ -49,16 +64,17 @@ class DataManager():
     if limit != None:
       query += " LIMIT " + str(limit)
     c = self.conn.cursor()
-    print query
+    if "print" in args:
+      print query
     for row in c.execute(query):
       num = random.random()
       if split != None and num > split:
-        self.test_b.append(row[1])
+        self.test_b.append(preprocess(row[1]))
         self.test_l.append(the_label(row))
       else:
-        self.train_b.append(row[1])
+        self.train_b.append(preprocess(row[1]))
         self.train_l.append(the_label(row))
-    print "selected tweets..."
+
     return self.train_b, self.train_l, self.test_b, self.test_l
 
   def unique_labels(self, train=True, test=False):
