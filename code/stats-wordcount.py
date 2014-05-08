@@ -8,8 +8,8 @@ c = conn.cursor()
 
 counts = {}
 start = time.time()
-for row in c.execute("SELECT * FROM raw_tweets"):
-  body = row[1]
+for row in c.execute("SELECT * FROM wiki_articles"):
+  body = row[4]
   words = body.split(" ")
   for w in words:
     w = w.lower()

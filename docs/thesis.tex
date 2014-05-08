@@ -5,7 +5,7 @@
 
 \bibliographystyle{plain}
 
-\title {Geolocation through Language Recognition}
+\title {Can You Guess Where I Am?\\ Geolocating Tweets with Text Classification}
 
 \author {Will Potter}
 \adviser {Professor David Kauchak}
@@ -81,20 +81,27 @@ Data was collected from the Twitter API by querying their streaming API for all 
 
 The dataset is comprised of 1,656,146 tweets with 612,728 unique users tweeting within a period of February 13, 2014 and March 6th, 2014. This sample represents all geotagged, English-language tweets collected over random time intervals during the above period. Collection from the Twitter API occasionally times out, leaving gaps where tweets were not collected. As Twitter publishes approximately 500 million tweets per day, this dataset of 1.6 million represents a vast minority of tweets between the dates of collection, yet it still provides a significant number for running experiments.
 
-In addition to Twitter data, Wikipedia articles were used to provide another training base. Given the large number of place specific terms 
+To narrow down the dataset and ensure a more operable corpus, tweets were randomly selected if they fell within the United States boundaries (including Hawaii, Alaska and Washington D.C.). Territories and minor outyling islands were not included. The resulting dataset contained 144,546 tweets from all 50 states and Washington D.C., however only 284 / 3,144 counties or county equivalents were represented. Some counties, like New York County (Manhattan), represented with 1,256 tweets (0.8\% of the dataset), or Los Angeles County, represented with 3,879 tweets (2.7\%), held disproportionately high numbers of tweets as they both have disproportionately large populations for a county.
+
+In addition to Twitter data, Wikipedia articles were used to provide another training corpus. Given the large number of place specific terms, Wikipedia articles could be effective at ``teaching'' a model the textual representation of a particular location. For example, the article on the Boston Financial District contains ``street'', ``headquarters'', ``financial'', ``bank'' and ``boston'' as the 5 most used words, after stopwords are removed.
+
+Wikipedia titles were acquired along with their geographic coordinates through dbpedia.org, and then downloaded through the raw Wikipedia API.
+
+
 \section{Preprocessing}
 Tweets tend to be informal and are filled with insignificant, popular words (``the", ``I", ``a") as well as a range of misspellings. In addition, tweets contain links and usernames that don't necessarily have a strong correlation to one's location. For this reason, simply counting each word as a feature is a naïve approach that introduces an unwanted amount of noise to classification experiments. Additionally, examining bigrams, or particular phrases, as opposed to simply looking at 1-gram words is expected to increase the accuracy of classification. The bigram, ``in Boston", is more likely to imply the user is actually in Boston compared to ``from Boston".
 
-\section{Labeling}
-Tweets are labeled with geographic coordinates or regions pertaining to particular cities or areas. The geographic locations come from mobile phone GPS units or Twitter's own location detection attempts that incorporate IP addresses as well as some textual features.
+\subsection{Word Capitalization and Symbols}
 
-\chapter{Experimental Methods}
+ In downloading the articles, symbols, links and non-alphanumeric characters were removed (with the exception of spaces). Additionally, a list of stopwords were removed from each article, to apply greater weight and to relevant toponyms (the word ``Boston'' appears most in the ``Boston,\_Massachusetts'' article).
 
-\section{Posing the question as a classification problem}
-Taking the dataset of geotagged tweets, this study structures its experiments as a classification problem. The tweets in question are already geotagged, thus providing a definitive definition of where they were written. With this in mind, the goal is to predict the geographic coordinates of tweets without included geodata.
+To simplify the data, capital letters were removed from all tweets and Wikipedia articles. Additionally, all symbols were removed. 
 
-\section{Scope}
-While the dataset only comprises English language tweets, tweets are saved from around the world. Given the lack of English speakers in many regions of the world, it could be problematic to label the entire world, as a region in Africa will have substantially fewer training examples than a region in Fairfield County, CT would have. Experiments will examine the continental US separately in addition to attempting worldwide classification.
+Punctuation, symbols, emoji and other characters were preserved in tweets, however, a preprocessing filter was run for several experiments that would remove all non-alpha numeric characters. In addition, urls and user handles were removed. Pound signs (\#) were removed from tweets with preprocessing filters, leaving the hashtag word, while allowing it to match words in Wikipedia or other tweets that weren't converted to hashtags. For example, ``\#boston'' would match ``Boston''. 
+
+
+\subsection{Stopwords}
+While stopwords were removed from all Wikipedia articles, stopwords were left in the database of tweets. Therefore, experiments could be run on comparing un-preprocessed tweets to preprocessed tweets. Common in text classification, stopwords reduce the effect insignificant words have on model. A full list of stopwords can be seen in the Appendix.
 
 \section{Labels}
 This study examines several different methodologies for labeling tweets.
@@ -105,17 +112,38 @@ In running experiments, labels are derived from the geographic coordinates of a 
 \subsection{Political Boundaries}
 Using political boundaries or census designated places, as labels would be a slightly more intelligent way to break up the corpus of tweets, but still doesn't account for a large difference in population density. Breaking up a heavily populated state like Massachusetts or New Jersey into more buckets than Montana or Wyoming would give more authentic labels, due to the diversity and increased activity on social media. Additionally, latitude and longitude are often not the most effective ways of differentiating a population as cultural boundaries are often not straight lines.
 
-To simplify experiments, tweets outside of the 50 United States were discarded and each tweet was given a numeric FIPS (Federal Information Processing Standard) label corresponding to a state.
+To simplify experiments, tweets outside of the 50 United States were discarded and each tweet was given a numeric FIPS (Federal Information Processing Standard) label corresponding to a state. Additionally, tweets were assigned a more specific, county-level numeric identifier. Experiments were run on both levels of precision
 
 \subsection{N-sized Example Buckets}
 Using a k-dimensional tree to break up tweets into n-sized buckets by their latitude and longitude, experiments will break the dataset into labels that more accurately represent population distribution across the planet. This method is similar to the work of Roller et al. \cite{roller2012supervised}, except it will train the model on tweets rather than Wikipedia data.
+\chapter{Experimental Methods}
+
+\section{Posing the question as a classification problem}
+Taking the dataset of geotagged tweets, this study structures its experiments as a classification problem. The tweets in question are already geotagged, thus providing a definitive definition of where they were written. With this in mind, the goal is to predict the geographic coordinates of tweets without included geodata.
+
+\section{Scope}
+While the dataset only comprises English language tweets, tweets are saved from around the world. Given the lack of English speakers in many regions of the world, it could be problematic to label the entire world, as a region in Africa will have substantially fewer training examples than a region in Fairfield County, CT would have. Experiments will examine the continental US separately in addition to attempting worldwide classification.
+
+
 
 \section{Data Training and Testing Protocols}
 
 \subsection{Randomness and Cross Validation}
-Due to performance implications, most experiments ran with 10000 examples. From the 1.6 million-tweet corpus, tweets are randomly selected for each experiment. All models then run on the same random, 10000-example sample to avoid variation that might stem from pulling drastically different sets from the complete corpus.
+Due to performance implications, most experiments ran with 20000 examples. From the 144,456 US tweet corpus, tweets are randomly selected for each experiment. All models then run on the same random, 20000-example sample to avoid variation that might stem from pulling drastically different sets from the complete corpus.
 
-Additionally, to account for variation that might occur within 1 experiment, 10-fold cross validation is used rather than simply running testing the whole sample in one go. Within each fold, the data is split into 80\% training and 20\% testing.
+Additionally, to account for variation that might occur within 1 experiment, experiments are performed at least 15 times. Given our performance limits and the 20,000 tweet limit, we're able to select a new set of 20,000 tweets to train on. As one of our benchmarks for performance is accuracy relative to the strategy of choosing the majority label and each subset has a slightly different majority label, we calculate performance relative to  the majority strategy. Accuracy is defined in Equation~\ref{eqn:accuracy}, and improvement is defined in Equation~\ref{eqn:improvement}
+
+\begin{equation}
+\label{eqn:accuracy}
+accuracy_{test}=\frac{examples_{correct}}{examples_{total}}
+\end{equation}
+
+\begin{equation}
+\label{eqn:improvement}
+improvement=accuracy_{test} - \frac{examples_{majority}}{examples_{total}}
+\end{equation}
+
+Within each fold, the data is split into 80\% training and 20\% testing.
 
 \section{Supervised Learning Models}
 \subsection{K-Nearest Neighbor}
@@ -129,7 +157,16 @@ In order to mitigate the risk of insignificant terms weighting the distance metr
 
 Using the Naive Bayes model for text classification introduces another method to improve accuracy. While an effective model, our data should be preprocessed to ignore many of the random noise words included in most tweets. With each ineffective term in the training set, the overall effectiveness of Naive Bayes decreases. When training on a toponym heavy dataset like Wikipedia, Naive Bayes can be quite effective.
 
+\subsubsection{Multinomial Naive Bayes}
+The simpler of the two classifiers, Multinomial Naive Bayes classifier, examples are given a label based on the likelihood that each of their features has a certain label. As shown in Equation~\ref{eqn:multinomialNaiveBayes}, the model examines both the probability that a document has a specific label, as well as the probability that each word is used in that label. The label chosen is the one with the highest probability.
 
+\begin{equation}
+\label{eqn:multinomialNaiveBayes}
+max(p(f_1, \dots, f_n \vert L) )= max(p(L) \prod_{i=1}^n (L|f_i))
+\end{equation}
+
+\subsubsection{Bernoulli Naive Bayes}
+Unlike Multinomial Naive Bayes, Bernoulli Naive Bayes (BNB) doesn't care about word counts and relative probabilities. Rather BNB merely looks for the presence or absence of a particular feature. Bernoulli Naive Bayes doesn't account for one word appearing many more times than another word.
 
 
 \chapter{Examples/Results}
@@ -138,6 +175,30 @@ Using the Naive Bayes model for text classification introduces another method to
 TODO: Find some interesting examples from testing
 
 \section{Results}
+
+In general, classifying locations based on the text of a tweet proved to be incredibly difficult. Given that many tweets lack any meaningful location information. Out of 10 randomly pulled tweets, only one contained a reference to a location. The tweet, ``If Pittsburgh wins this...'', didn't even overtly reference the author's location. While the author may have been a Pittsburgh sports fan, there is a good chance that they were supporting the other team as well. As such, results were difficult to gauge and success came in small amounts. Improving accuracy by 1 or 2 percent above ``Majority Strategy'' was good, given that only 1 in 100 tweets might contain useful location information. General accuracy for the final methods can be found in Table~\ref{table:finalResults}.
+
+\begin{table}
+\label{table:finalResults}
+\centering 
+  \begin{tabular}{| c | c | c | c | c |}
+  \hline
+  \multicolumn{5}{ |c| }{Accuracy Improvement above choosing the Majority Label} \\
+  \hline      
+  &\multicolumn{2}{ |c| }{State Labels} &  \multicolumn{2}{ |c| }{County Labels}  \\
+  \hline                 
+  Classifier & Preprocessing & No Preprocessing & Preprocessing & No Preprocessing \\
+  \hline                 
+  Multinomial NB & 2.082\% & 2.147\% & 0.370\% & \\ 
+KNN 2000 & 0.217\% & 0.172\% & -0.002\% & \\
+KNN 1000 & 0.376\% & 0.226\% & -0.029\% & \\
+Bernoulli NB & 1.563\% & 1.401\% & 0.355\% & \\ 
+  \hline  
+  \end{tabular}
+
+\end{table}
+
+
 \subsection{KNN/Grid Labeling Results}
 As shown in the table below, K-Nearest Neighbor increases accuracy with an increase in clusters. With both labeling schemes, they don't appear to improve beyond K values of 128. K values of 128 appear to slightly dominate choosing exclusively the majority label.
 
@@ -167,18 +228,25 @@ As shown in the table below, K-Nearest Neighbor increases accuracy with an incre
 
 \end{table}
 
+\subsection{Naive Bayes}
 
-\subsection{State Boundary Results}
-\subsection{K-dimensional Tree Results}
-\subsection{Naive Bayes Results}
+Using both Naive Bayes variants yielded better results over the KNN classifier. Given the sparsity of the Twitter data, it is possible that the nearest neighbors were chosen based on words the tweets shared. Given the short timeframe while the Tweets were collected, its possible that temporal events affected the nearest neighbors of the tweets. Tweets were collected during Valentines day and the word ``valentine'' appears in the top 100 of the US-tweets dataset.
 
-\subsection{Discussion on Preprocessing}
+\subsection{State/County Boundary Results}
+
+When using states and counties as labels, states tended to be more effective at predicting location. Regardless of the classifier used, state labels could be predicted more effectively than county labels. Given that some of the counties had very few tweets, they most likely lacked sufficient training featurest to train a meaningful classifier. States, however, had many more tweets per label and more meaningful classifiers could be generated.
+
+\subsection{Preprocessing}
+
+Curiously enough, preprocessing did not have a significant effect on accuracy. Studies are still ongoing to determine the significance of preprocessing.
 
 
 \chapter{Conclusion}
 
 
 \appendix
+\chapter{List of Stopwords}
+ ``a'', ``able'', ``about'', ``above'', ``abst'', ``accordance'', ``according'', ``accordingly'', ``across'', ``act'', ``actually'', ``added'', ``adj'', ``affected'', ``affecting'', ``affects'', ``after'', ``afterwards'', ``again'', ``against'', ``ah'', ``all'', ``almost'', ``alone'', ``along'', ``already'', ``also'', ``although'', ``always'', ``am'', ``among'', ``amongst'', ``an'', ``and'', ``announce'', ``another'', ``any'', ``anybody'', ``anyhow'', ``anymore'', ``anyone'', ``anything'', ``anyway'', ``anyways'', ``anywhere'', ``apparently'', ``approximately'', ``are'', ``aren'', ``arent'', ``arise'', ``around'', ``as'', ``aside'', ``ask'', ``asking'', ``at'', ``auth'', ``available'', ``away'', ``awfully'', ``b'', ``back'', ``be'', ``became'', ``because'', ``become'', ``becomes'', ``becoming'', ``been'', ``before'', ``beforehand'', ``begin'', ``beginning'', ``beginnings'', ``begins'', ``behind'', ``being'', ``believe'', ``below'', ``beside'', ``besides'', ``between'', ``beyond'', ``biol'', ``both'', ``brief'', ``briefly'', ``but'', ``by'', ``c'', ``ca'', ``came'', ``can'', ``cannot'', ``can't'', ``cause'', ``causes'', ``certain'', ``certainly'', ``co'', ``com'', ``come'', ``comes'', ``contain'', ``containing'', ``contains'', ``could'', ``couldnt'', ``d'', ``date'', ``did'', ``didn't'', ``different'', ``do'', ``does'', ``doesn't'', ``doing'', ``done'', ``don't'', ``down'', ``downwards'', ``due'', ``during'', ``e'', ``each'', ``ed'', ``edu'', ``effect'', ``eg'', ``eight'', ``eighty'', ``either'', ``else'', ``elsewhere'', ``end'', ``ending'', ``enough'', ``especially'', ``et'', ``et-al'', ``etc'', ``even'', ``ever'', ``every'', ``everybody'', ``everyone'', ``everything'', ``everywhere'', ``ex'', ``except'', ``f'', ``far'', ``few'', ``ff'', ``fifth'', ``first'', ``five'', ``fix'', ``followed'', ``following'', ``follows'', ``for'', ``former'', ``formerly'', ``forth'', ``found'', ``four'', ``from'', ``further'', ``furthermore'', ``g'', ``gave'', ``get'', ``gets'', ``getting'', ``give'', ``given'', ``gives'', ``giving'', ``go'', ``goes'', ``gone'', ``got'', ``gotten'', ``h'', ``had'', ``happens'', ``hardly'', ``has'', ``hasn't'', ``have'', ``haven't'', ``having'', ``he'', ``hed'', ``hence'', ``her'', ``here'', ``hereafter'', ``hereby'', ``herein'', ``heres'', ``hereupon'', ``hers'', ``herself'', ``hes'', ``hi'', ``hid'', ``him'', ``himself'', ``his'', ``hither'', ``home'', ``how'', ``howbeit'', ``however'', ``hundred'', ``i'', ``id'', ``ie'', ``if'', ``i'll'', ``im'', ``immediate'', ``immediately'', ``importance'', ``important'', ``in'', ``inc'', ``indeed'', ``index'', ``information'', ``instead'', ``into'', ``invention'', ``inward'', ``is'', ``isn't'', ``itd'', ``it'll'', ``its'', ``itself'', ``i've'', ``j'', ``just'', ``k'', ``keep'', ``keeps'', ``kept'', ``kg'', ``km'', ``know'', ``known'', ``knows'', ``l'', ``largely'', ``last'', ``lately'', ``later'', ``latter'', ``latterly'', ``least'', ``less'', ``lest'', ``let'', ``lets'', ``like'', ``liked'', ``likely'', ``line'', ``little'', ``i'll'', ``look'', ``looking'', ``looks'', ``ltd'', ``m'', ``made'', ``mainly'', ``make'', ``makes'', ``many'', ``may'', ``maybe'', ``me'', ``mean'', ``means'', ``meantime'', ``meanwhile'', ``merely'', ``mg'', ``might'', ``million'', ``miss'', ``ml'', ``more'', ``moreover'', ``most'', ``mostly'', ``mr'', ``mrs'', ``much'', ``mug'', ``must'', ``my'', ``myself'', ``n'', ``na'', ``name'', ``namely'', ``nay'', ``nd'', ``near'', ``nearly'', ``necessarily'', ``necessary'', ``need'', ``needs'', ``neither'', ``never'', ``nevertheless'', ``next'', ``nine'', ``ninety'', ``no'', ``nobody'', ``non'', ``none'', ``nonetheless'', ``noone'', ``nor'', ``normally'', ``nos'', ``not'', ``noted'', ``nothing'', ``now'', ``nowhere'', ``o'', ``obtain'', ``obtained'', ``obviously'', ``of'', ``off'', ``often'', ``oh'', ``ok'', ``okay'', ``old'', ``omitted'', ``on'', ``once'', ``one'', ``ones'', ``only'', ``onto'', ``or'', ``ord'', ``other'', ``others'', ``otherwise'', ``ought'', ``our'', ``ours'', ``ourselves'', ``out'', ``outside'', ``over'', ``overall'', ``owing'', ``own'', ``p'', ``page'', ``pages'', ``part'', ``particular'', ``particularly'', ``past'', ``per'', ``perhaps'', ``placed'', ``please'', ``plus'', ``poorly'', ``possible'', ``possibly'', ``potentially'', ``pp'', ``predominantly'', ``present'', ``previously'', ``primarily'', ``probably'', ``promptly'', ``proud'', ``provides'', ``put'', ``q'', ``que'', ``quickly'', ``quite'', ``qv'', ``r'', ``ran'', ``rather'', ``rd'', ``re'', ``readily'', ``really'', ``recent'', ``recently'', ``ref'', ``refs'', ``regarding'', ``regardless'', ``regards'', ``related'', ``relatively'', ``research'', ``respectively'', ``resulted'', ``resulting'', ``results'', ``right'', ``run'', ``s'', ``said'', ``same'', ``saw'', ``say'', ``saying'', ``says'', ``sec'', ``section'', ``see'', ``seeing'', ``seem'', ``seemed'', ``seeming'', ``seems'', ``seen'', ``self'', ``selves'', ``sent'', ``seven'', ``several'', ``shall'', ``she'', ``shed'', ``she'll'', ``shes'', ``should'', ``shouldn't'', ``show'', ``showed'', ``shown'', ``showns'', ``shows'', ``significant'', ``significantly'', ``similar'', ``similarly'', ``since'', ``six'', ``slightly'', ``so'', ``some'', ``somebody'', ``somehow'', ``someone'', ``somethan'', ``something'', ``sometime'', ``sometimes'', ``somewhat'', ``somewhere'', ``soon'', ``sorry'', ``specifically'', ``specified'', ``specify'', ``specifying'', ``still'', ``stop'', ``strongly'', ``sub'', ``substantially'', ``successfully'', ``such'', ``sufficiently'', ``suggest'', ``sup'', ``sure'', ``the'', ``to'', ``too'', ``with'', ``was'', ``which'', ``that'', ``it'', ``this'', ``within'', ``include'', ``area'', ``000'', ``1'', ``2'', ``3'', ``4'', ``5'', ``6'', ``7'', ``8'', ``9'', ``0'', ``were'', ``we'', ``their'', ``there''
 % \chapter{Data Source}
 \nocite{*}
 \bibliographystyle{plain}

@@ -1,14 +1,27 @@
-import shapefile
 import ogr
 
 
-def get_label(row):
+def grid_1_degree(row):
   lat, lng = row[3], row[4]
   # 0 to 36
-  newlng = round((lng + 180) / 10)
+  newlng = round((lng + 180) / 360)
   # 0 to 18
-  newlat = round((lat + 90) / 10)
-  return str(int(newlat))+"_"+str(int(newlng))
+  newlat = round((lat + 90) / 180) * 1000
+  return int(newlat) + int(newlng)
+def grid_5_degree(row):
+  lat, lng = row[3], row[4]
+  # 0 to 36
+  newlng = round((lng + 180) / 72)
+  # 0 to 18
+  newlat = round((lat + 90) / 36) * 1000
+  return int(newlat) + int(newlng)
+def grid_10_degree(row):
+  lat, lng = row[3], row[4]
+  # 0 to 36
+  newlng = round((lng + 180) / 36)
+  # 0 to 18
+  newlat = round((lat + 90) / 18) * 1000
+  return int(newlat) + int(newlng)
 
 def majority_label(labels):
   counts = {}

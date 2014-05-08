@@ -1,7 +1,5 @@
 import sqlite3
 
-
-
 # Declare variables
 tweets = []
 stats = {}
@@ -33,7 +31,7 @@ stats["wiki_unique_words"] = len(wiki_words)
 for w in sorted(wiki_words, key=wiki_words.get, reverse=False):
   print w, wiki_words[w]
 
-for row in c.execute("SELECT * FROM raw_tweets"):
+for row in c.execute("SELECT * FROM us_tweets"):
   stats["total_count"] += 1
   if row[2] != None and row[3] != None:
     tweet_row = [row[0],row[1],row[2],row[3],row[4],row[5], row[6], row[7]]
@@ -54,7 +52,7 @@ for row in c.execute("SELECT * FROM raw_tweets"):
 
 # User-based statistics
 stats["unique_users"] = len(tweets_by_user)
-stats["average_tweets_per_user"] = stats["total_count"] / len(tweets_by_user)
+stats["average_tweets_per_user"] = float(stats["total_count"]) / float(len(tweets_by_user))
 stats["min_tweets"] = stats["total_count"]
 stats["max_tweets"] = 0
 stats["max_tweeter_id"] = -1

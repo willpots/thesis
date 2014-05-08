@@ -20,10 +20,10 @@ def index():
   min_lng = request.args.get('min_lng', '') or -174.375
    
   results = []
-  conn = sqlite3.connect('../twitter.db')
+  conn = sqlite3.connect('../us_twitter.db')
   c = conn.cursor()
   found = 0
-  for row in c.execute("SELECT * FROM tweets WHERE (lng <= ? AND lng >= ? AND lat <= ? AND lat >= ?) LIMIT ?", (max_lng, min_lng, max_lat, min_lat, count)):
+  for row in c.execute("SELECT * FROM us_tweets WHERE (lng <= ? AND lng >= ? AND lat <= ? AND lat >= ?) LIMIT ?", (max_lng, min_lng, max_lat, min_lat, count)):
     if row[2] != None and row[3] != None:
       found += 1
       results.append(row)

@@ -1,6 +1,4 @@
 import pickle
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfVectorizer
 
 from lib import *
 from labels import *
@@ -8,29 +6,37 @@ from metrics import *
 from features import *
 
 from db import DataManager
+from classifiers import Classifier
 
 DATABASE = "us_twitter.db"
 db_mgr = DataManager(DATABASE)
-train_tweets, train_labels = db_mgr.select_wikipedia_train()
+train_data, train_labels = db_mgr.select_wikipedia_train()
 
-count_vectorizer = get_vectorizer("tfidf", min_df=1)
-tf_idf_vectorizer = get_vectorizer("count", min_df=1)
+vectorizers = {
+  "count":get_vectorizer("tfidf", min_df=1),
+  "tfidf":get_vectorizer("count", min_df=1)
+}
 
 print "Vectorizing Training Data..."
-count_data = count_vectorizer.fit_transform(train_tweets)
-tf_idf_data = tf_idf_vectorizer.fit_transform(train_tweets)
+count_data = vectorizers["count"].fit_transform(train_data)
+tf_idf_data = vectorizers["tfidf"].fit_transform(train_data)
 
 classifiers = {
-  2: KNeighborsClassifier(n_neighbors=2),
-  4: KNeighborsClassifier(n_neighbors=4),
-  8: KNeighborsClassifier(n_neighbors=8),
-  20: KNeighborsClassifier(n_neighbors=20),
-  40: KNeighborsClassifier(n_neighbors=40),
-  80: KNeighborsClassifier(n_neighbors=80),
-  200: KNeighborsClassifier(n_neighbors=200),
-  400: KNeighborsClassifier(n_neighbors=400),
-  600: KNeighborsClassifier(n_neighbors=600),
-  800: KNeighborsClassifier(n_neighbors=800),
-  1000: KNeighborsClassifier(n_neighbors=1000),
-  2000: KNeighborsClassifier(n_neighbors=2000)
+  "BernoulliNB": {
+    "count":Classifier(classifier="bnb"),
+    "tfidf":Classifier(classifier="bnb")
+  },
+  "MultinomialNB": {
+    "count":Classifier(classifier="nb"),
+    "tfidf":Classifier(classifier="nb")
+  }
 }
+
+for c in classifiers:
+  print "Training", c, "count"
+  classifiers[c]["count"].fit(count_data, train_labels)
+  pickle.dump( classifiers[c]["count"], open( "classifier-"+str(c)+"-count.p", "wb" ) )
+  print "Training", c, "tfidf"
+  classifiers[c]["tfidf"].fit(tf_idf_data, train_labels)
+  pickle.dump( classifiers[c]["tfidf"], open( "classifier-"+str(c)+"-tfidf.p", "wb" ) )
+

@@ -1,7 +1,3 @@
-import sqlite3
-import random
-import numpy
-import pylab
 import pickle
 # Don't clutter the damn namespace
 from lib import *
@@ -11,12 +7,6 @@ from features import *
 from classifiers import Classifier
 
 from db import DataManager
-
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.naive_bayes import BernoulliNB
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.svm import SVC
 
 N_TIMES = 1
 

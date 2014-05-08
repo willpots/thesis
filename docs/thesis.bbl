@@ -10,11 +10,22 @@ Company info | facebook newsroom.
 \newblock \url{https://newsroom.fb.com/company-info/}.
 \newblock (Visited on 03/20/2014).
 
+\bibitem{Naive7Online}
+Naive bayes text classification.
+\newblock
+  \url{http://nlp.stanford.edu/IR-book/html/htmledition/naive-bayes-text-classification-1.html}.
+\newblock (Visited on 04/25/2014).
+
 \bibitem{businessinsider}
 Smartphone and tablet penetration - business insider.
 \newblock
   \url{http://www.businessinsider.com/smartphone-and-tablet-penetration-2013-10}.
 \newblock (Visited on 03/20/2014).
+
+\bibitem{Think1:Online}
+Think globally, tweet locally | twitter blogs.
+\newblock \url{https://blog.twitter.com/2009/think-globally-tweet-locally}.
+\newblock (Visited on 05/05/2014).
 
 \bibitem{bentley1975multidimensional}
 Jon~Louis Bentley.
@@ -72,6 +83,11 @@ Kalev Leetaru, Shaowen Wang, Guofeng Cao, Anand Padmanabhan, and Eric Shook.
 \newblock Mapping the global twitter heartbeat: The geography of twitter.
 \newblock {\em First Monday}, 18(5), 2013.
 
+\bibitem{manning2008introduction}
+Christopher~D Manning, Prabhakar Raghavan, and Hinrich Sch{\"u}tze.
+\newblock {\em Introduction to information retrieval}, volume~1.
+\newblock Cambridge university press Cambridge, 2008.
+
 \bibitem{nakaji2012visualization}
 Yusuke Nakaji and Keiji Yanai.
 \newblock Visualization of real-world events with geotagged tweet photos.
@@ -98,6 +114,12 @@ Stephen Roller, Michael Speriosu, Sarat Rallapalli, Benjamin Wing, and Jason
 \newblock In {\em Proceedings of the 2012 Joint Conference on Empirical Methods
   in Natural Language Processing and Computational Natural Language Learning},
   pages 1500--1510. Association for Computational Linguistics, 2012.
+
+\bibitem{russell1995artificial}
+Stuart~Jonathan Russell, Peter Norvig, John~F Canny, Jitendra~M Malik, and
+  Douglas~D Edwards.
+\newblock {\em Artificial intelligence: a modern approach}, volume~2.
+\newblock Prentice hall Englewood Cliffs, 1995.
 
 \bibitem{teitler2002newsstand}
 Benjamin~E. Teitler, Michael~D. Lieberman, Daniele Panozzo, Jagan

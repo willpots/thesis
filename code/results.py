@@ -2,7 +2,7 @@ from lib import *
 from scipy.stats import ttest_1samp
 import numpy as np
 
-results = get("knn_results.json")
+results = get("results.json")
 
 
 def print_p_values(obj, space=""):

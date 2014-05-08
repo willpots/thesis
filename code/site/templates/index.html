@@ -68,43 +68,43 @@
 
 
 <script type="text/javascript">
-  var startPoint = [37.8922, -90];
-  var map = L.map('map', {
-    attributionControl: false, 
-    editInOSMControl: true, 
-    editInOSMControlOptions: {
-      position: 'topleft'
-    }
-  });
-
-  var max_lat = {{ max_lat }};
-  var max_lng = {{ max_lng }};
-  var min_lat = {{ min_lat }};
-  var min_lng = {{ min_lng }};
-  var northWest = L.latLng(max_lat, max_lng);
-  var southEast = L.latLng(min_lat, min_lng);
-  var bounds = L.latLngBounds(southEast, northWest);
-  var tilelayer = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {maxZoom: 20}).addTo(map);
-  var markers = [];
-
-
-  {% for result in results %}
-    // "{{ result[1].strip('\n') }}"
-    markers.push(L.circleMarker([{{ result[3] }}, {{ result[4] }}], {
-      radius: 4,
-      color: 'rgb(0,162,220)',
-      weight: 1,
-      fill:true,
-      fillColor: 'rgb(0,172,238)',
-      fillOpacity: 0.5
-    }).addTo(map));
-  {% endfor %}
-
-  map.fitBounds(bounds);
-
+ 
 
   $(document).ready(function() {
 
+    var startPoint = [37.8922, -90];
+    var map = L.map('map', {
+      attributionControl: false, 
+      editInOSMControl: true, 
+      editInOSMControlOptions: {
+        position: 'topleft'
+      }
+    });
+
+    var max_lat = {{ max_lat }};
+    var max_lng = {{ max_lng }};
+    var min_lat = {{ min_lat }};
+    var min_lng = {{ min_lng }};
+    var northWest = L.latLng(max_lat, max_lng);
+    var southEast = L.latLng(min_lat, min_lng);
+    var bounds = L.latLngBounds(southEast, northWest);
+    var tilelayer = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {maxZoom: 20}).addTo(map);
+    var markers = [];
+
+
+    {% for result in results %}
+      // "{{ result[1].strip('\n') }}"
+      markers.push(L.circleMarker([{{ result[3] }}, {{ result[4] }}], {
+        radius: 4,
+        color: 'rgb(0,162,220)',
+        weight: 1,
+        fill:true,
+        fillColor: 'rgb(0,172,238)',
+        fillOpacity: 0.5
+      }).addTo(map));
+    {% endfor %}
+
+    map.fitBounds(bounds);
 
     $("#reload").click(function(e) {
       console.log("reloading");

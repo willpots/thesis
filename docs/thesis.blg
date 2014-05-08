@@ -2,7 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2013)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: plain.bst
-Illegal, another \bibstyle command---line 55 of file thesis.aux
+Illegal, another \bibstyle command---line 64 of file thesis.aux
  : \bibstyle
  :          {plain}
 I'm skipping whatever remains of this command
@@ -10,45 +10,47 @@ Database file #1: sources.bib
 Warning--to sort, need author or key in facebookabout
 Warning--to sort, need author or key in twitterabout
 Warning--to sort, need author or key in businessinsider
-You've used 20 entries,
+Warning--to sort, need author or key in Naive7Online
+Warning--to sort, need author or key in Think1:Online
+You've used 24 entries,
             2118 wiz_defined-function locations,
-            606 strings with 8090 characters,
-and the built_in function-call counts, 8148 in all, are:
-= -- 848
-> -- 326
-< -- 13
-+ -- 131
-- -- 110
-* -- 497
-:= -- 1204
-add.period$ -- 72
-call.type$ -- 20
-change.case$ -- 115
+            625 strings with 8788 characters,
+and the built_in function-call counts, 9132 in all, are:
+= -- 936
+> -- 374
+< -- 15
++ -- 151
+- -- 126
+* -- 555
+:= -- 1356
+add.period$ -- 84
+call.type$ -- 24
+change.case$ -- 133
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 359
-empty$ -- 679
-format.name$ -- 110
-if$ -- 1853
+cite$ -- 29
+duplicate$ -- 397
+empty$ -- 769
+format.name$ -- 126
+if$ -- 2067
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 17
-newline$ -- 103
-num.names$ -- 34
-pop$ -- 171
+int.to.str$ -- 24
+missing$ -- 21
+newline$ -- 123
+num.names$ -- 38
+pop$ -- 211
 preamble$ -- 1
-purify$ -- 95
+purify$ -- 111
 quote$ -- 0
-skip$ -- 274
+skip$ -- 298
 stack$ -- 0
-substring$ -- 509
-swap$ -- 144
-text.length$ -- 13
+substring$ -- 529
+swap$ -- 150
+text.length$ -- 15
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 80
-warning$ -- 3
-while$ -- 73
-width$ -- 22
-write$ -- 229
+type$ -- 92
+warning$ -- 5
+while$ -- 77
+width$ -- 26
+write$ -- 269
 (There was 1 error message)

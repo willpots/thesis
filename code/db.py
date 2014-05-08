@@ -2,7 +2,6 @@ from labels import *
 import sqlite3
 import random
 from lib import *
-from sklearn import cross_validation
 
 class DataManager():
   def __init__(self, name):
@@ -69,10 +68,16 @@ class DataManager():
     for row in c.execute(query):
       num = random.random()
       if split != None and num > split:
-        self.test_b.append(preprocess(row[1]))
+        if "preprocess" in args and args["preprocess"] == True:
+          self.test_b.append(preprocess(row[1]))
+        else:
+          self.test_b.append(row[1].lower())
         self.test_l.append(the_label(row))
       else:
-        self.train_b.append(preprocess(row[1]))
+        if "preprocess" in args and args["preprocess"] == True:
+          self.train_b.append(preprocess(row[1]))
+        else:
+          self.train_b.append(row[1].lower())
         self.train_l.append(the_label(row))
 
     return self.train_b, self.train_l, self.test_b, self.test_l
