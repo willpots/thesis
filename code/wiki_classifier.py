@@ -51,3 +51,9 @@ print w.predict(string)
 string = "Corn"
 print string
 print w.predict(string)
+string = "Corn"
+print string
+print w.predict(string)
+string = "Corruption"
+print string
+print w.predict(string)
