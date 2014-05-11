@@ -1,8 +1,6 @@
 import simplejson
 import json
 import re
-import math
-from scipy.stats import ttest_1samp
 from math import radians, cos, sin, asin, sqrt
 
 def distance(lat1, lon1, lat2, lon2):

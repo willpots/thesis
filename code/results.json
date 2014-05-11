@@ -1,6 +1,22 @@
 {
   "BernoulliNB": {
     "no_preprocess": {
+      "tweets": {
+        "state_label": {
+          "test_accuracy": [
+            0.1139978608149605
+          ],
+          "test_improvement": [
+            0.030121105475623647
+          ],
+          "train_accuracy": [
+            0.18156330313335584
+          ],
+          "train_improvement": [
+            0.09768654779401899
+          ]
+        }
+      },
       "wiki": {
         "state_label": {
           "test_accuracy": [
@@ -255,6 +271,22 @@
       }
     },
     "preprocess": {
+      "tweets": {
+        "state_label": {
+          "test_accuracy": [
+            0.11298834818368746
+          ],
+          "test_improvement": [
+            0.03269362577107608
+          ],
+          "train_accuracy": [
+            0.18476847598079157
+          ],
+          "train_improvement": [
+            0.1044737535681802
+          ]
+        }
+      },
       "wiki": {
         "state_label": {
           "test_accuracy": [
@@ -511,6 +543,22 @@
   },
   "MultinomialNB": {
     "no_preprocess": {
+      "tweets": {
+        "state_label": {
+          "test_accuracy": [
+            0.13280198737190768
+          ],
+          "test_improvement": [
+            0.048925232032570834
+          ],
+          "train_accuracy": [
+            0.27052776407673734
+          ],
+          "train_improvement": [
+            0.18665100873740048
+          ]
+        }
+      },
       "wiki": {
         "state_label": {
           "test_accuracy": [
@@ -765,6 +813,22 @@
       }
     },
     "preprocess": {
+      "tweets": {
+        "state_label": {
+          "test_accuracy": [
+            0.1245373543522961
+          ],
+          "test_improvement": [
+            0.04424263193968472
+          ],
+          "train_accuracy": [
+            0.27105039613057574
+          ],
+          "train_improvement": [
+            0.19075567371796437
+          ]
+        }
+      },
       "wiki": {
         "state_label": {
           "test_accuracy": [

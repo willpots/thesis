@@ -6,18 +6,18 @@ from features import *
 from classifiers import Classifier
 from db import DataManager
 
-N_TIMES = 60
+N_TIMES = 1
 VECTORIZER = "tfidf"
-SIZE = 20000
+SIZE = 200000
 
 
 params = [
-          ["wiki", "no_preprocess", "state_label",state_fips,False],
+          ["tweets", "no_preprocess", "state_label",state_fips,False],
           # ["wiki", "no_preprocess", "county_label",county_label,False],
           # ["tweets", "no_preprocess", "grid_1_label",grid_1_degree,False],
           # ["tweets", "no_preprocess", "grid_5_label",grid_5_degree,False],
           # ["tweets", "no_preprocess", "grid_10_label",grid_10_degree,False],
-          ["wiki", "preprocess", "state_label",state_fips,True]
+          ["tweets", "preprocess", "state_label",state_fips,True]
           # ["wiki", "preprocess", "county_label",county_label,True]
           # ["tweets", "preprocess", "grid_1_label",grid_1_degree,True],
           # ["tweets", "preprocess", "grid_5_label",grid_5_degree,True],

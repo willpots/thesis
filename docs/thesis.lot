@@ -1,6 +1,12 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Examples of the effect of preprocessing on expressions.}}{9}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Improvement upon choosing the majority label. \textbf {Bold} results are significant at a 5\% confidence interval and \textit {italic} results are significant at a 10\% confidence interval.\newline }}{17}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Difference in percent improvement over randomly guessing the majority label between State and County labels for certain classifiers. \textbf {Bold} results are significant with a 5\% confidence interval. $n=60$ for each classifier. Significance was tested using a 2-tailed, paired T-test.\newline }}{18}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Difference between Preprocessing and Non-preprocessing in percent improvement over randomly guessing the majority label. \textbf {Bold} results are significant with a 5\% confidence interval. $n=60$ for each classifier. Significance was tested using a 2-tailed, paired T-test.\newline }}{19}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

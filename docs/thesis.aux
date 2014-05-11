@@ -5,6 +5,8 @@
 \newlabel{lof}{{}{6}}
 \citation{facebookabout}
 \citation{twitterabout}
+\citation{businessinsider}
+\citation{heartbeat:leetaru}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{1}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -20,50 +22,69 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{roller2012supervised}
 \citation{thom2012spatiotemporal}
+\citation{twitterabout}
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Data and Preprocessing}{7}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Data}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces All Tweets from the study's dataset in the Lower 48 United States.}}{8}}
+\newlabel{fig:tweetmap}{{3.1}{8}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Preprocessing}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Word Capitalization and Symbols}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Stopwords}{9}}
+\newlabel{table:preprocessing}{{3.2}{9}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Examples of the effect of preprocessing on expressions.}}{9}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Labels}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Geographic Grid Regions}{9}}
-\citation{roller2012supervised}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Geographic Grid Regions}{10}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Political Boundaries}{10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}N-sized Example Buckets}{10}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Experimental Methods}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces A one degree by one degree zone labeling bucket.}}{11}}
+\newlabel{fig:grid_zone}{{3.2}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces A labeling zone for Massachusetts.}}{11}}
+\newlabel{fig:state_zone}{{3.3}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces A labeling zone for Suffolk County, Massachusetts.}}{12}}
+\newlabel{fig:county_zone}{{3.4}{12}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Experimental Methods}{13}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Posing the question as a classification problem}{11}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Scope}{11}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Data Training and Testing Protocols}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Randomness and Cross Validation}{11}}
-\newlabel{eqn:accuracy}{{4.1}{12}}
-\newlabel{eqn:improvement}{{4.2}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Supervised Learning Models}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}K-Nearest Neighbor}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Naive Bayes}{13}}
-\@writefile{toc}{\contentsline {subsubsection}{Multinomial Naive Bayes}{13}}
-\newlabel{eqn:multinomialNaiveBayes}{{4.3}{13}}
-\@writefile{toc}{\contentsline {subsubsection}{Bernoulli Naive Bayes}{13}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Examples/Results}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Setup}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Scope}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Data Training and Testing Protocols}{13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Randomness and Cross Validation}{13}}
+\newlabel{eqn:accuracy}{{4.1}{14}}
+\newlabel{eqn:improvement}{{4.2}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Supervised Learning Models}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}K-Nearest Neighbor}{14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Naive Bayes}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{Multinomial Naive Bayes}{15}}
+\newlabel{eqn:multinomialNaiveBayes}{{4.3}{15}}
+\@writefile{toc}{\contentsline {subsubsection}{Bernoulli Naive Bayes}{15}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Experimental Results and Examples}{16}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Examples}{14}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Results}{14}}
-\newlabel{table:finalResults}{{5.2}{14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}KNN/Grid Labeling Results}{15}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Naive Bayes}{15}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}State/County Boundary Results}{16}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Preprocessing}{16}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion}{17}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Results}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Classification}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}KNN/Grid Labeling Results}{16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Naive Bayes}{16}}
+\newlabel{table:finalResults}{{5.1.1}{17}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces Improvement upon choosing the majority label. \textbf  {Bold} results are significant at a 5\% confidence interval and \textit  {italic} results are significant at a 10\% confidence interval.\newline  }}{17}}
+\newlabel{fig:labelingResults}{{5.1.4}{18}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.2}{\ignorespaces Difference in percent improvement over randomly guessing the majority label between State and County labels for certain classifiers. \textbf  {Bold} results are significant with a 5\% confidence interval. $n=60$ for each classifier. Significance was tested using a 2-tailed, paired T-test.\newline  }}{18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}State/County Boundary Results}{18}}
+\newlabel{fig:preprocessingResults}{{5.1.5}{19}}
+\@writefile{lot}{\contentsline {table}{\numberline {5.3}{\ignorespaces Difference between Preprocessing and Non-preprocessing in percent improvement over randomly guessing the majority label. \textbf  {Bold} results are significant with a 5\% confidence interval. $n=60$ for each classifier. Significance was tested using a 2-tailed, paired T-test.\newline  }}{19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.5}Preprocessing}{19}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Examples}{19}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion}{20}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}List of Stopwords}{21}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Tweets by State}{24}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \citation{*}
 \bibstyle{plain}
 \bibdata{sources}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}List of Stopwords}{18}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {C}Wikipedia Articles by State}{25}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{twitterabout}{1}
@@ -78,9 +99,9 @@
 \bibcite{hiruta2012detection}{10}
 \bibcite{kinsella2011m}{11}
 \bibcite{kwak2010twitter}{12}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{21}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{26}}
 \bibcite{lee2010uncovering}{13}
-\bibcite{FM4366}{14}
+\bibcite{heartbeat:leetaru}{14}
 \bibcite{manning2008introduction}{15}
 \bibcite{nakaji2012visualization}{16}
 \bibcite{paradesi2011geotagging}{17}

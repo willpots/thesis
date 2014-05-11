@@ -15,9 +15,9 @@
 \maketitle
 
 \begin{abstract}
-With an increasing amount of text being shared on the web, through blogs, social media, websites pictures, it is becoming increasingly more difficult to translate the text in these mediums into geographic coordinates and physical locations. While GPS-enabled devices are becoming more popular, many people with mobile phones would prefer to not share their locations with applications and companies. Additionally, IP geolocation lacks the precision that GPS-enabled devices have. Yet, while Internet users don't explicitly share their GPS-location, they often will share information about their location in the form of textual status updates. Using geotagged tweets and other geotagged information, it should be possible to identify similarities between non-geotagged texts and classify someone's location by the words included in their tweet. With this information, more intelligence can be gathered about people tweeting, even if they haven't included their specific geographic coordinates with the tweet.
+With massive amounts of textual data being shared on the web, through blogs, social media, websites pictures, the opportunity for extracting relevant metadata is expanding, including geographic information. While GPS-enabled devices are becoming more popular, many people with mobile phones would prefer to not share their locations with applications and companies. Additionally, IP geolocation, often isn't available or completely accurate.  This study trained traditional text classifiers on geotagged Twitter data (Tweets) using the text statuses as the features and the geographic location as labels in order to predict the location of tweets based exclusively on their text. The dataset contained 144,856 English-language tweets sent from the 50 United States and the District of Columbia. Training on randomly selected sets of roughly 16,000 tweets, the best classification methods yielded just over a 2\% accuracy boost when compared with choosing the most frequently occuring label in the training set. While the practical applications of replicating this experiment in commericial environments are small, it shows that a larger dataset might yield more promising results.
 
-This thesis will focus specifically on classifying text to a variety of regions, including countries, states, counties and towns. It will use a variety of supervised learning classification techniques including SVM's and Naive Bayes. While the classifier is importance, the study will also focus on feature preprocessing, as that will most likely have a great impact on the results of the final product.
+
 \end{abstract}
 
 \begin{acknowledgements}
@@ -36,12 +36,12 @@ This thesis will focus specifically on classifying text to a variety of regions,
 
 The rapid growth of social media in the past 10 years has shown that people are living their lives increasingly more through the internet and are sharing more information with more people than ever before in history. At the end of 2013, Facebook had 1.23 billion monthly active users \cite{facebookabout} and Twitter had 241 million monthly active users \cite{twitterabout} -- and those are just the largest two networks. People are sharing content online through Pinterest, Foursquare, Tumblr and many other sites. Yet while the number of social media users has expanded, much about their behavior is still difficult to determine.
 
-As people share information, companies analyze user information to help data monetization efforts, such as advertising. For example, if 95\% of a company’s users were under the age of 30, advertising for retirement communities wouldn't be an efficient use of advertising space. They also review user behavior to improve their product and determine where efforts should be expanded. If only 3\% of Facebook users were to use Facebook chat, spending effort elsewhere would be prudent. 
+As people share information, companies analyze user information to help data monetization efforts, such as advertising. A local fast food restaurant in Burlington, Vermont might like to target Twitter users who not only like fast food, but also live within a certain radius of the restaurant. Increased targeting filters allow companies to reduce the amount of total advertising dollars needed for user engagement. 
 
-While this principle seems similar, analyzing this data becomes increasingly more complex as the size of the data increases -- Twitter, alone, manages 500 million tweets per day. Deriving useful conclusions from such a large dataset requires an intricate knowledge of the data before effective analysis can be applied.
+While the principle is simple, analyzing this data becomes increasingly more complex as the size of the data increases--Twitter, alone, manages 500 million tweets per day. Deriving useful conclusions from such a large dataset requires an intricate knowledge of the data before effective analysis can be applied.
 
 \section{Smartphones and Geotagging}
-In addition to the growth of social media, the world has seen the adoption of the Internet connected smartphone. Business Insider found that 22\% of the global population owned a smartphone at the end of 2013. Quite simply, people are sharing more and doing so wherever they go. As someone uses their phone, they also have the ability to share their phone's GPS location and attach it to their social media updates. This premise gave way to the creation of Foursquare, a geographic social network that allows users to share their location with other users and local businesses for perks. As Foursquare refined their idea, Facebook and Twitter soon followed with location-sharing services inside their mobile apps. Even though these features are now a part of most social media apps, adoption has not be excellent. Estimates show that only 1 in 5 tweets are geotagged, which still beats Facebook’s poor geographic integration (Need Better Citation).
+In addition to the growth of social media, the world has seen the adoption of the Internet connected smartphones. Business Insider found that 22\% of the global population owned a smartphone at the end of 2013\cite{businessinsider}. People are sharing more and doing so wherever they go. More than ever, phone users have the ability to share their GPS location apps and social media sites. This opportunity gave way to the creation of Foursquare, a geographic social network that allows users to broadcast their location to other users and local businesses. As Foursquare refined their idea, Facebook and Twitter soon followed with location-sharing services inside their mobile apps. Even though these features are now a part of many social media apps, location sharing has not seen widespread adoption. Estimates show that roughly 2\% of tweets sent at any given moment contain geographic information.\cite{heartbeat:leetaru}
 
 Geotagging is particularly useful for advertising, as well as business intelligence. Twitter, while an incomplete sample of the population, can serve as a tracking agent for businesses. While the requirement that people ``opt-in" to sharing their location may be a bias in the data, companies still may use geotagged tweets as a random sample of all social media users when running analytics to generalize conclusions across an entire user base. For example, McDonald's might like to show an advertisement for someone who works immediately next to one, but has never tweeted or checked-in at a their restaurant. A user's proximity to a certain business makes them a more appealing ad target, which in turn provides a premium experience for advertisers to use. A McDonald's or Target would greatly prefer to target people who live nearby or pass through town rather than simply targeting based on a user's interests, tweets or follows.
 
@@ -57,7 +57,9 @@ Additionally, the use of neighboorhoods or other place names may indicate a geog
 
 Finally, the presence of particular words, like ``frappe" and ``milkshake" may indicate if someone is in a particular location. Tweets with ``frappe" are less popular and appear in the Northeast mainly, while ``milkshake" appears more frequently and across a greater geographic area.
 
-Using a fair degree of knowledge about the use cases of Twitter, we can hope to see some success in analyzing a tweet's textual body to infer the location of a user.
+Using a fair degree of knowledge about the use cases of Twitter,  can hope to see some success in analyzing a tweet's textual body to infer the location of a user.
+
+With some degree of knowledge regarding Twitter's use cases, designing a text classification model should yield positive and productive results for determining the location of tweets based exclusively on their text bodies.
 
 \chapter{Related Work}
 
@@ -77,48 +79,88 @@ Additionally, the tweet corpus has been analyzed to search for spatiotemporal an
 \chapter{Data and Preprocessing}
 \section{Data}
 
-Data was collected from the Twitter API by querying their streaming API for all tweets with an attached pair of geographic coordinates or an attached geofenced region. Tweets with a region attached were assigned the midpoint of the region. A program, running on a personal computer would run for a period of time downloading new tweets during that period and storing them in a database. 
+Data was collected from the Twitter API by querying their streaming API for all tweets with an attached pair of geographic coordinates or an attached geofenced region. Tweets with a region attached were assigned the midpoint of the region. 
 
-The dataset is comprised of 1,656,146 tweets with 612,728 unique users tweeting within a period of February 13, 2014 and March 6th, 2014. This sample represents all geotagged, English-language tweets collected over random time intervals during the above period. Collection from the Twitter API occasionally times out, leaving gaps where tweets were not collected. As Twitter publishes approximately 500 million tweets per day, this dataset of 1.6 million represents a vast minority of tweets between the dates of collection, yet it still provides a significant number for running experiments.
+The dataset is comprised of 144,546 tweets with 84,860 unique users tweeting on February 13, 2014. This sample represents all geotagged, English-language tweets collected over random time intervals during the above period. Additionally, all tweets were sent from locations in the United States. Collection from the Twitter API occasionally times out, leaving gaps where tweets were not collected. As Twitter publishes approximately 500 million tweets per day\cite{twitterabout}, this dataset represents a small minority of tweets. While small, it still provides a nice starting set useful for running experiments on a personal computer without significant performance issues.
 
-To narrow down the dataset and ensure a more operable corpus, tweets were randomly selected if they fell within the United States boundaries (including Hawaii, Alaska and Washington D.C.). Territories and minor outyling islands were not included. The resulting dataset contained 144,546 tweets from all 50 states and Washington D.C., however only 284 / 3,144 counties or county equivalents were represented. Some counties, like New York County (Manhattan), represented with 1,256 tweets (0.8\% of the dataset), or Los Angeles County, represented with 3,879 tweets (2.7\%), held disproportionately high numbers of tweets as they both have disproportionately large populations for a county.
+Geographically, all tweets were sent from within the 50 United States, as well as Washington D.C. Overseas territories and minor outyling islands were not included. All 50 States (and D.C.) were represented all 50 states and Washington D.C., however only 2570 of 3,144 counties or county equivalents were represented. Some counties, like New York County (Manhattan), represented with 1,256 tweets (0.8\% of the dataset), or Los Angeles County, represented with 3,879 tweets (2.7\%), held disproportionately high numbers of tweets as they both have disproportionately large populations for a county.
 
-In addition to Twitter data, Wikipedia articles were used to provide another training corpus. Given the large number of place specific terms, Wikipedia articles could be effective at ``teaching'' a model the textual representation of a particular location. For example, the article on the Boston Financial District contains ``street'', ``headquarters'', ``financial'', ``bank'' and ``boston'' as the 5 most used words, after stopwords are removed.
+\begin{figure}
+\centering
+\includegraphics[width=0.85\textwidth]{full_country_map.png}
+\caption{All Tweets from the study's dataset in the Lower 48 United States.}
+\label{fig:tweetmap}
+\end{figure}
+
+In addition to Twitter data, 122,816 geotagged Wikipedia articles were used to provide another training corpus. Given the large number of place specific terms, Wikipedia articles could be effective at ``teaching'' a model the textual representation of a particular location. For example, the article on the Boston Financial District contains ``street'', ``headquarters'', ``financial'', ``bank'' and ``boston'' as the 5 most used words, after stopwords are removed.
 
 Wikipedia titles were acquired along with their geographic coordinates through dbpedia.org, and then downloaded through the raw Wikipedia API.
 
 
 \section{Preprocessing}
-Tweets tend to be informal and are filled with insignificant, popular words (``the", ``I", ``a") as well as a range of misspellings. In addition, tweets contain links and usernames that don't necessarily have a strong correlation to one's location. For this reason, simply counting each word as a feature is a naïve approach that introduces an unwanted amount of noise to classification experiments. Additionally, examining bigrams, or particular phrases, as opposed to simply looking at 1-gram words is expected to increase the accuracy of classification. The bigram, ``in Boston", is more likely to imply the user is actually in Boston compared to ``from Boston".
+Tweets tend to be informal and are filled with insignificant, popular words (``the", ``I", ``a") as well as a range of misspellings. In addition, tweets contain links and usernames that don't necessarily have a strong correlation to one's location. For this reason, simply counting each word as a feature is a naïve approach that introduces an unwanted amount of noise to classification experiments.
 
-\subsection{Word Capitalization and Symbols}
-
- In downloading the articles, symbols, links and non-alphanumeric characters were removed (with the exception of spaces). Additionally, a list of stopwords were removed from each article, to apply greater weight and to relevant toponyms (the word ``Boston'' appears most in the ``Boston,\_Massachusetts'' article).
-
-To simplify the data, capital letters were removed from all tweets and Wikipedia articles. Additionally, all symbols were removed. 
-
-Punctuation, symbols, emoji and other characters were preserved in tweets, however, a preprocessing filter was run for several experiments that would remove all non-alpha numeric characters. In addition, urls and user handles were removed. Pound signs (\#) were removed from tweets with preprocessing filters, leaving the hashtag word, while allowing it to match words in Wikipedia or other tweets that weren't converted to hashtags. For example, ``\#boston'' would match ``Boston''. 
+In addition to testing the effects of different classifiers, an experiment was constructed to test the effects of preprocessing the data. Experiments without preprocessing enabled used the raw content from the tweet, with all original characters left untouched. Preprocessing, however, heavily modified the body of the tweet by stripping capitalization, symbols, links, usernames and common English words, known as stopwords. By removing capitalization, the total number of features in the training model is reduced. This reduction in the total number of words should decrease the chance that valuable features are outweighed by meaningless features. Furthermore, removing symbols, links and usernames should decrease the total number of features in the classifier, giving a more accurate representation of what people mean, rather than the literal text representation. While some usernames, like ``@bostonglobe'', do contain valuable information, most appeared to lack any relevant geographic information in their name. Hashtags (i.e. ``\#bostonstrong''), often contain geographic information, however, pound symbols were removed to ensure ``\#nyc'' and ``nyc'' would resolve to the same feature. Table~\ref{table:preprocessing} shows examples of input and output to the preprocessing method. While all features referring to a geographic entity are not reduced to the same feature, the preprocessing method reduces the 13 sample features with preprocessed features storing counts more.
 
 
-\subsection{Stopwords}
-While stopwords were removed from all Wikipedia articles, stopwords were left in the database of tweets. Therefore, experiments could be run on comparing un-preprocessed tweets to preprocessed tweets. Common in text classification, stopwords reduce the effect insignificant words have on model. A full list of stopwords can be seen in the Appendix.
+\begin{table}
+\label{table:preprocessing}
+\caption{Examples of the effect of preprocessing on expressions.}
+\centering 
+  \begin{tabular}{| c | c |}
+  \hline
+  Before & After \\
+  \hline
+  ``Boston'' & ``boston'' \\
+  ``(Boston, MA)'' & ``boston ma'' \\
+  ``Boston's'' & ``bostons'' \\
+  ``Boston?'' & ``boston'' \\
+  ``Boston, MA'' & ``boston ma'' \\
+  ``\#boston'' & ``boston'' \\
+  ``\#bostonma'' & ``bostonma'' \\
+  ``@bostonhockey'' & ``'' \\
+  ``We are Boston!'' & ``boston'' \\
+  \hline  
+  \end{tabular}
+\end{table}
 
 \section{Labels}
-This study examines several different methodologies for labeling tweets.
+To achieve the best accuracy, labels should take advantage of natural divisions between the population. In theory, people living in the same community will generally refer to the same places, whether that community is a state, metropolitan area, town or a neighborhood. Unfortunately, running experiments on tweets labeled by their town or neighborhood is difficult on a personal computer.
 
 \subsection{Geographic Grid Regions}
-In running experiments, labels are derived from the geographic coordinates of a tweet. As the labels run across as wide range of real numbers in 2 dimensions, effectively labeling the training features is a non-trivial process. The easiest way to label tweets is to break up the geographic into regions of equal latitude and longitude intervals. This, however, ignores cultural boundaries and dense areas. A 1-degree x 1-degree ``bucket" in Montana has a smaller and more homogenous population with fewer places. However, the ``bucket" including New York City would have many more people, places and material and determining if a tweet originated there would be difficult. Given the inequality of area as latitudes change, this can be expected to behave differently for regions on the equator when compared with polar regions. While most of the world's population and tweets do not originate from the extreme poles, northern/southern regions will be broken into smaller buckets than central areas.
+In running experiments, labels are derived from the geographic coordinates of a tweet. As the labels run across a wide range of real numbers in 2 dimensions, effectively labeling the training features is a non-trivial process. The easiest way to label tweets is to break up the geographic into regions of equal latitude and longitude intervals. This, however, ignores cultural boundaries and dense areas. A 1-degree x 1-degree ``bucket" in Montana has a smaller and more homogenous population with fewer places. However, the ``bucket" including New York City would have many more people, places and material and determining if a tweet originated there would be difficult. Given the inequality of area as latitudes change, this can be expected to behave differently for regions on the equator when compared with polar regions. While most of the world's population and tweets do not originate from the extreme poles, northern/southern regions will be broken into smaller buckets than central areas.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{grid_zone.png}
+\caption{A one degree by one degree zone labeling bucket.}
+\label{fig:grid_zone}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{state_zone.png}
+\caption{A labeling zone for Massachusetts.}
+\label{fig:state_zone}
+\end{figure}
 
 \subsection{Political Boundaries}
-Using political boundaries or census designated places, as labels would be a slightly more intelligent way to break up the corpus of tweets, but still doesn't account for a large difference in population density. Breaking up a heavily populated state like Massachusetts or New Jersey into more buckets than Montana or Wyoming would give more authentic labels, due to the diversity and increased activity on social media. Additionally, latitude and longitude are often not the most effective ways of differentiating a population as cultural boundaries are often not straight lines.
+As latitude and longitude lines often run across political boundaries, the grid-based approach is likely to include training data from the same population in two separate examples. For example, Manhattan is bisected by two separate buckets with the 1x1 degree scale with Trenton, NJ and parts of the Philadelphia suburbs included in the Western bucket and parts of Long Island falling into the Eastern bucket. See Figure~\ref{fig:grid_zone}. 
 
-To simplify experiments, tweets outside of the 50 United States were discarded and each tweet was given a numeric FIPS (Federal Information Processing Standard) label corresponding to a state. Additionally, tweets were assigned a more specific, county-level numeric identifier. Experiments were run on both levels of precision
+Tweets were labeled with two separate resolutions for experiements: state and county. Each tweet was given a numeric FIPS (Federal Information Processing Standard) label corresponding to a state. Figure~\ref{fig:state_zone} shows a sample zone, where the metropolitan areas around Boston, Worcester and Springfield are largely captured in the same label. While New Hampshire and Rhode Island may pick up on some of the population that either lives, works or visits the Boston metropolitan area, most of the community is encompassed.
 
-\subsection{N-sized Example Buckets}
-Using a k-dimensional tree to break up tweets into n-sized buckets by their latitude and longitude, experiments will break the dataset into labels that more accurately represent population distribution across the planet. This method is similar to the work of Roller et al. \cite{roller2012supervised}, except it will train the model on tweets rather than Wikipedia data.
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{county_zone.png}
+\caption{A labeling zone for Suffolk County, Massachusetts.}
+\label{fig:county_zone}
+\end{figure}
+
+This study does not label tweets on a Metropolitan/Micropolitan/Rural scale, however future studies should consider that these boundaries may segment people more naturally than state and county lines.
+
 \chapter{Experimental Methods}
 
-\section{Posing the question as a classification problem}
+\section{Setup}
 Taking the dataset of geotagged tweets, this study structures its experiments as a classification problem. The tweets in question are already geotagged, thus providing a definitive definition of where they were written. With this in mind, the goal is to predict the geographic coordinates of tweets without included geodata.
 
 \section{Scope}
@@ -129,7 +171,7 @@ While the dataset only comprises English language tweets, tweets are saved from 
 \section{Data Training and Testing Protocols}
 
 \subsection{Randomness and Cross Validation}
-Due to performance implications, most experiments ran with 20000 examples. From the 144,456 US tweet corpus, tweets are randomly selected for each experiment. All models then run on the same random, 20000-example sample to avoid variation that might stem from pulling drastically different sets from the complete corpus.
+Due to performance limitations,  experiments ran with 20000 examples. From the 144,456 US tweet corpus, tweets are randomly selected for each experiment. All models then run on the same random, 20000-example sample to avoid variation that might stem from pulling drastically different sets from the complete corpus.
 
 Additionally, to account for variation that might occur within 1 experiment, experiments are performed at least 15 times. Given our performance limits and the 20,000 tweet limit, we're able to select a new set of 20,000 tweets to train on. As one of our benchmarks for performance is accuracy relative to the strategy of choosing the majority label and each subset has a slightly different majority label, we calculate performance relative to  the majority strategy. Accuracy is defined in Equation~\ref{eqn:accuracy}, and improvement is defined in Equation~\ref{eqn:improvement}
 
@@ -158,6 +200,7 @@ In order to mitigate the risk of insignificant terms weighting the distance metr
 Using the Naive Bayes model for text classification introduces another method to improve accuracy. While an effective model, our data should be preprocessed to ignore many of the random noise words included in most tweets. With each ineffective term in the training set, the overall effectiveness of Naive Bayes decreases. When training on a toponym heavy dataset like Wikipedia, Naive Bayes can be quite effective.
 
 \subsubsection{Multinomial Naive Bayes}
+
 The simpler of the two classifiers, Multinomial Naive Bayes classifier, examples are given a label based on the likelihood that each of their features has a certain label. As shown in Equation~\ref{eqn:multinomialNaiveBayes}, the model examines both the probability that a document has a specific label, as well as the probability that each word is used in that label. The label chosen is the one with the highest probability.
 
 \begin{equation}
@@ -166,88 +209,191 @@ max(p(f_1, \dots, f_n \vert L) )= max(p(L) \prod_{i=1}^n (L|f_i))
 \end{equation}
 
 \subsubsection{Bernoulli Naive Bayes}
+
 Unlike Multinomial Naive Bayes, Bernoulli Naive Bayes (BNB) doesn't care about word counts and relative probabilities. Rather BNB merely looks for the presence or absence of a particular feature. Bernoulli Naive Bayes doesn't account for one word appearing many more times than another word.
 
 
-\chapter{Examples/Results}
-**Still in progress**
-\section{Examples}
-TODO: Find some interesting examples from testing
+\chapter{Experimental Results and Examples}
+
 
 \section{Results}
+\subsection{Classification}
+
 
 In general, classifying locations based on the text of a tweet proved to be incredibly difficult. Given that many tweets lack any meaningful location information. Out of 10 randomly pulled tweets, only one contained a reference to a location. The tweet, ``If Pittsburgh wins this...'', didn't even overtly reference the author's location. While the author may have been a Pittsburgh sports fan, there is a good chance that they were supporting the other team as well. As such, results were difficult to gauge and success came in small amounts. Improving accuracy by 1 or 2 percent above ``Majority Strategy'' was good, given that only 1 in 100 tweets might contain useful location information. General accuracy for the final methods can be found in Table~\ref{table:finalResults}.
 
 \begin{table}
 \label{table:finalResults}
+\caption{Improvement upon choosing the majority label. \textbf{Bold} results are significant at a 5\% confidence interval and \textit{italic} results are significant at a 10\% confidence interval.\newline }
 \centering 
-  \begin{tabular}{| c | c | c | c | c |}
-  \hline
-  \multicolumn{5}{ |c| }{Accuracy Improvement above choosing the Majority Label} \\
+  \begin{tabular}{| c | c | c | c | c  | c |}
   \hline      
-  &\multicolumn{2}{ |c| }{State Labels} &  \multicolumn{2}{ |c| }{County Labels}  \\
+Classifier & Preprocessing & Labeling & Test Improvement & P-Value \\
   \hline                 
-  Classifier & Preprocessing & No Preprocessing & Preprocessing & No Preprocessing \\
-  \hline                 
-  Multinomial NB & 2.082\% & 2.147\% & 0.370\% & \\ 
-KNN 2000 & 0.217\% & 0.172\% & -0.002\% & \\
-KNN 1000 & 0.376\% & 0.226\% & -0.029\% & \\
-Bernoulli NB & 1.563\% & 1.401\% & 0.355\% & \\ 
-  \hline  
+Multinomial NB & No Preprocess & State  & \textbf{2.196\%} & 6.93E-41 \\
+Multinomial NB & Preprocess & State  & \textbf{2.109\%} & 5.39E-38 \\
+Bernoulli NB & No Preprocess & State  & \textbf{1.442\%} & 7.03E-36 \\
+Bernoulli NB & Preprocess & State  & \textbf{1.422\%} & 2.42E-38 \\
+Multinomial NB & Preprocess & County & \textbf{0.427\%} & 3.69E-27 \\
+Bernoulli NB & Preprocess & County & \textbf{0.416\%} & 1.29E-30 \\
+KNN-1000 & No Preprocess & State  & \textbf{0.231\%} & 0.0039 \\
+KNN-2000 & No Preprocess & State &  \textbf{0.183\%} & 0.0212 \\
+Multinomial NB & No Preprocess & County & \textbf{0.165\%} & 6.77E-17 \\
+Bernoulli NB & No Preprocess & County & \textbf{0.156\%} & 4.00E-18 \\
+KNN-1000 & Preprocess & State & \textbf{0.120\%} & 0.0332 \\
+KNN-2000 & Preprocess & State & 0.081\% & 0.1178 \\
+KNN-2000 & No Preprocess & County & -0.001\% & 0.1813 \\
+KNN-1000 & Preprocess & County & \textit{-0.009\%} & 0.0771 \\
+KNN-1000 & No Preprocess & County & \textit{-0.024\%} & 0.0707 \\
+KNN-100 & No Preprocess & State & \textbf{-0.156\%} & 0.0207 \\
+KNN-50 & No Preprocess & State & \textbf{-0.534\%} & 2.65E-09 \\
+KNN-100 & Preprocess & State & \textbf{-0.788\%} & 1.61E-10 \\
+KNN-100 & No Preprocess & County & \textbf{-0.809\%} & 1.06E-26 \\
+KNN-100 & Preprocess & County & \textbf{-0.880\%} & 8.16E-20 \\
+KNN-50 & No Preprocess & County & \textbf{-1.173\%} & 1.37E-43 \\
+KNN-50 & Preprocess & State & \textbf{-1.180\%} & 5.70E-21 \\
+KNN-50 & Preprocess & County & \textbf{-1.214\%} & 1.67E-30 \\  
+\hline  
   \end{tabular}
-
 \end{table}
 
 
 \subsection{KNN/Grid Labeling Results}
 As shown in the table below, K-Nearest Neighbor increases accuracy with an increase in clusters. With both labeling schemes, they don't appear to improve beyond K values of 128. K values of 128 appear to slightly dominate choosing exclusively the majority label.
 
-
-
-\begin{table}
-\centering 
-  \begin{tabular}{| c | c | c |}
-  \hline
-  \multicolumn{3}{ |c| }{K-Nearest Neighbor Test Data Results} \\
-  \hline      
-  Labeling Grid: & 2$^{\circ}$ x2$^{\circ}$ &  10$^{\circ}$x10$^{\circ}$  \\
-  Unique Labels: & 623 & 139  \\
-  \hline                 
-  Majority  & 0.0632124352332  & 0.168604651163 \\
-  2 NN & 0.0103626943005 & 0.094476744186 \\
-  4 NN & 0.0129533678756 & \textbf{0.180717054264} \\
-  8 NN & 0.0150259067358 & 0.101259689922 \\
-  16 NN & 0.0290155440415 & 0.140988372093 \\
-  32 NN & 0.0461139896373 & \textbf{0.176356589147} \\
-  64 NN & 0.059067357513 & 0.132751937984 \\
-  128 NN & \textbf{0.0652849740933} & \textbf{0.171511627907} \\
-  256 NN & \textbf{0.0678756476684} & \textbf{0.184108527132} \\
-  512 NN & \textbf{0.0652849740933} & \textbf{0.179748062016} \\
-  \hline  
-  \end{tabular}
-
-\end{table}
-
 \subsection{Naive Bayes}
 
-Using both Naive Bayes variants yielded better results over the KNN classifier. Given the sparsity of the Twitter data, it is possible that the nearest neighbors were chosen based on words the tweets shared. Given the short timeframe while the Tweets were collected, its possible that temporal events affected the nearest neighbors of the tweets. Tweets were collected during Valentines day and the word ``valentine'' appears in the top 100 of the US-tweets dataset.
+Using both Naive Bayes variants yielded better results over the KNN classifier. Given the sparsity of the Twitter data, it is possible that the nearest neighbors were chosen based on words the tweets shared. Given the short timeframe while the Tweets were collected, its possible that temporal events affected the nearest neighbors of the tweets. Tweets were collected during Valentines day and the word ``valentine'' appears in the top 100 words of the US-tweets dataset.
 
 \subsection{State/County Boundary Results}
 
-When using states and counties as labels, states tended to be more effective at predicting location. Regardless of the classifier used, state labels could be predicted more effectively than county labels. Given that some of the counties had very few tweets, they most likely lacked sufficient training featurest to train a meaningful classifier. States, however, had many more tweets per label and more meaningful classifiers could be generated.
+
+\begin{table}
+\label{fig:labelingResults}
+\caption{Difference in percent improvement over randomly guessing the majority label between State and County labels for certain classifiers. \textbf{Bold} results are significant with a 5\% confidence interval. $n=60$ for each classifier. Significance was tested using a 2-tailed, paired T-test.\newline }
+
+\centering 
+  \begin{tabular}{| c | c | c |}
+  \hline      
+  Classifier & Test Improvement & P-Value \\
+  \hline
+\textbf{Bernoulli NB No Preprocessing} &\textbf{ 1.285\% }& \textbf{ 3.80E-32 }\\
+\textbf{Bernoulli NB Preprocessing} &\textbf{ 1.006\% }& \textbf{ 6.35E-30 }\\
+\textbf{Multinomial NB No Preprocessing} &\textbf{ 2.032\% }& \textbf{ 2.19E-38 }\\
+\textbf{Multinomial NB Preprocessing} &\textbf{ 1.682\% }& \textbf{ 2.87E-31 }\\
+\textbf{KNN-50 No Preprocessing}&\textbf{ 0.639\% }& \textbf{ 4.00E-10 }\\
+KNN-50 Preprocessing & 0.033\% & 0.6877 \\
+\textbf{KNN-100 No Preprocessing} &\textbf{ 0.652\% }& \textbf{ 3.59E-11 }\\
+KNN-100 Preprocessing & 0.092\% & 0.3773 \\
+\textbf{KNN-1000 No Preprocessing} &\textbf{ 0.255\% }& \textbf{ 0.0022 }\\
+\textbf{KNN-1000 Preprocessing} &\textbf{ 0.129\% }& \textbf{ 0.0209 }\\
+\textbf{KNN-2000 No Preprocessing} &\textbf{ 0.184\% }& \textbf{ 0.0204 }\\
+KNN-2000 Preprocessing & 0.081\% & 0.1178 \\
+  \hline  
+  \end{tabular}
+\end{table}
+
+
+
+When using states and counties as labels, states tended to be more effective at predicting location. Regardless of the classifier used, state labels could be predicted more effectively than county labels, however some classifiers lacked statistical significance between using difference labeling schemes. Given that some of the counties had very few tweets, they most likely lacked sufficient training featurest to train a meaningful classifier. States, however, had many more tweets per label and more meaningful classifiers could be generated.
 
 \subsection{Preprocessing}
+
+
+\begin{table}
+\label{fig:preprocessingResults}
+\caption{Difference between Preprocessing and Non-preprocessing in percent improvement over randomly guessing the majority label. \textbf{Bold} results are significant with a 5\% confidence interval. $n=60$ for each classifier. Significance was tested using a 2-tailed, paired T-test.\newline}
+\centering 
+  \begin{tabular}{| c | c | c |}
+  \hline      
+  Classifier & Test Improvement & P-Value \\
+  \hline                 
+Bernoulli NB State & -0.0199\% & 0.746 \\
+\textbf{Bernoulli NB County} & \textbf{0.2592\%} & \textbf{2.07E-16} \\
+Multinomial NB State & -0.0874\% & 0.346 \\
+\textbf{Multinomial NB County} & \textbf{0.2629\%} & \textbf{2.30E-14} \\
+\textbf{KNN-50 State} & \textbf{-0.6461\%} & \textbf{1.26E-07} \\
+KNN-50 County & -0.0404\% & 0.530 \\
+\textbf{KNN-100 State} & \textbf{-0.6312\%} & \textbf{3.76E-06} \\
+KNN-100 County & -0.0713\% & 0.369 \\
+KNN-1000 State & -0.1107\% & 0.259 \\
+KNN-1000 County & 0.0150\% & 0.289 \\
+KNN-2000 State & -0.1017\% & 0.269 \\
+KNN-2000 County & 1.23E-05 & 0.181 \\
+  \hline  
+  \end{tabular}
+\end{table}
+
+
 
 Curiously enough, preprocessing did not have a significant effect on accuracy. Studies are still ongoing to determine the significance of preprocessing.
 
 
+
+
+\section{Examples}
+
 \chapter{Conclusion}
+
+
 
 
 \appendix
 \chapter{List of Stopwords}
  ``a'', ``able'', ``about'', ``above'', ``abst'', ``accordance'', ``according'', ``accordingly'', ``across'', ``act'', ``actually'', ``added'', ``adj'', ``affected'', ``affecting'', ``affects'', ``after'', ``afterwards'', ``again'', ``against'', ``ah'', ``all'', ``almost'', ``alone'', ``along'', ``already'', ``also'', ``although'', ``always'', ``am'', ``among'', ``amongst'', ``an'', ``and'', ``announce'', ``another'', ``any'', ``anybody'', ``anyhow'', ``anymore'', ``anyone'', ``anything'', ``anyway'', ``anyways'', ``anywhere'', ``apparently'', ``approximately'', ``are'', ``aren'', ``arent'', ``arise'', ``around'', ``as'', ``aside'', ``ask'', ``asking'', ``at'', ``auth'', ``available'', ``away'', ``awfully'', ``b'', ``back'', ``be'', ``became'', ``because'', ``become'', ``becomes'', ``becoming'', ``been'', ``before'', ``beforehand'', ``begin'', ``beginning'', ``beginnings'', ``begins'', ``behind'', ``being'', ``believe'', ``below'', ``beside'', ``besides'', ``between'', ``beyond'', ``biol'', ``both'', ``brief'', ``briefly'', ``but'', ``by'', ``c'', ``ca'', ``came'', ``can'', ``cannot'', ``can't'', ``cause'', ``causes'', ``certain'', ``certainly'', ``co'', ``com'', ``come'', ``comes'', ``contain'', ``containing'', ``contains'', ``could'', ``couldnt'', ``d'', ``date'', ``did'', ``didn't'', ``different'', ``do'', ``does'', ``doesn't'', ``doing'', ``done'', ``don't'', ``down'', ``downwards'', ``due'', ``during'', ``e'', ``each'', ``ed'', ``edu'', ``effect'', ``eg'', ``eight'', ``eighty'', ``either'', ``else'', ``elsewhere'', ``end'', ``ending'', ``enough'', ``especially'', ``et'', ``et-al'', ``etc'', ``even'', ``ever'', ``every'', ``everybody'', ``everyone'', ``everything'', ``everywhere'', ``ex'', ``except'', ``f'', ``far'', ``few'', ``ff'', ``fifth'', ``first'', ``five'', ``fix'', ``followed'', ``following'', ``follows'', ``for'', ``former'', ``formerly'', ``forth'', ``found'', ``four'', ``from'', ``further'', ``furthermore'', ``g'', ``gave'', ``get'', ``gets'', ``getting'', ``give'', ``given'', ``gives'', ``giving'', ``go'', ``goes'', ``gone'', ``got'', ``gotten'', ``h'', ``had'', ``happens'', ``hardly'', ``has'', ``hasn't'', ``have'', ``haven't'', ``having'', ``he'', ``hed'', ``hence'', ``her'', ``here'', ``hereafter'', ``hereby'', ``herein'', ``heres'', ``hereupon'', ``hers'', ``herself'', ``hes'', ``hi'', ``hid'', ``him'', ``himself'', ``his'', ``hither'', ``home'', ``how'', ``howbeit'', ``however'', ``hundred'', ``i'', ``id'', ``ie'', ``if'', ``i'll'', ``im'', ``immediate'', ``immediately'', ``importance'', ``important'', ``in'', ``inc'', ``indeed'', ``index'', ``information'', ``instead'', ``into'', ``invention'', ``inward'', ``is'', ``isn't'', ``itd'', ``it'll'', ``its'', ``itself'', ``i've'', ``j'', ``just'', ``k'', ``keep'', ``keeps'', ``kept'', ``kg'', ``km'', ``know'', ``known'', ``knows'', ``l'', ``largely'', ``last'', ``lately'', ``later'', ``latter'', ``latterly'', ``least'', ``less'', ``lest'', ``let'', ``lets'', ``like'', ``liked'', ``likely'', ``line'', ``little'', ``i'll'', ``look'', ``looking'', ``looks'', ``ltd'', ``m'', ``made'', ``mainly'', ``make'', ``makes'', ``many'', ``may'', ``maybe'', ``me'', ``mean'', ``means'', ``meantime'', ``meanwhile'', ``merely'', ``mg'', ``might'', ``million'', ``miss'', ``ml'', ``more'', ``moreover'', ``most'', ``mostly'', ``mr'', ``mrs'', ``much'', ``mug'', ``must'', ``my'', ``myself'', ``n'', ``na'', ``name'', ``namely'', ``nay'', ``nd'', ``near'', ``nearly'', ``necessarily'', ``necessary'', ``need'', ``needs'', ``neither'', ``never'', ``nevertheless'', ``next'', ``nine'', ``ninety'', ``no'', ``nobody'', ``non'', ``none'', ``nonetheless'', ``noone'', ``nor'', ``normally'', ``nos'', ``not'', ``noted'', ``nothing'', ``now'', ``nowhere'', ``o'', ``obtain'', ``obtained'', ``obviously'', ``of'', ``off'', ``often'', ``oh'', ``ok'', ``okay'', ``old'', ``omitted'', ``on'', ``once'', ``one'', ``ones'', ``only'', ``onto'', ``or'', ``ord'', ``other'', ``others'', ``otherwise'', ``ought'', ``our'', ``ours'', ``ourselves'', ``out'', ``outside'', ``over'', ``overall'', ``owing'', ``own'', ``p'', ``page'', ``pages'', ``part'', ``particular'', ``particularly'', ``past'', ``per'', ``perhaps'', ``placed'', ``please'', ``plus'', ``poorly'', ``possible'', ``possibly'', ``potentially'', ``pp'', ``predominantly'', ``present'', ``previously'', ``primarily'', ``probably'', ``promptly'', ``proud'', ``provides'', ``put'', ``q'', ``que'', ``quickly'', ``quite'', ``qv'', ``r'', ``ran'', ``rather'', ``rd'', ``re'', ``readily'', ``really'', ``recent'', ``recently'', ``ref'', ``refs'', ``regarding'', ``regardless'', ``regards'', ``related'', ``relatively'', ``research'', ``respectively'', ``resulted'', ``resulting'', ``results'', ``right'', ``run'', ``s'', ``said'', ``same'', ``saw'', ``say'', ``saying'', ``says'', ``sec'', ``section'', ``see'', ``seeing'', ``seem'', ``seemed'', ``seeming'', ``seems'', ``seen'', ``self'', ``selves'', ``sent'', ``seven'', ``several'', ``shall'', ``she'', ``shed'', ``she'll'', ``shes'', ``should'', ``shouldn't'', ``show'', ``showed'', ``shown'', ``showns'', ``shows'', ``significant'', ``significantly'', ``similar'', ``similarly'', ``since'', ``six'', ``slightly'', ``so'', ``some'', ``somebody'', ``somehow'', ``someone'', ``somethan'', ``something'', ``sometime'', ``sometimes'', ``somewhat'', ``somewhere'', ``soon'', ``sorry'', ``specifically'', ``specified'', ``specify'', ``specifying'', ``still'', ``stop'', ``strongly'', ``sub'', ``substantially'', ``successfully'', ``such'', ``sufficiently'', ``suggest'', ``sup'', ``sure'', ``the'', ``to'', ``too'', ``with'', ``was'', ``which'', ``that'', ``it'', ``this'', ``within'', ``include'', ``area'', ``000'', ``1'', ``2'', ``3'', ``4'', ``5'', ``6'', ``7'', ``8'', ``9'', ``0'', ``were'', ``we'', ``their'', ``there''
-% \chapter{Data Source}
+
+\chapter{Tweets by State}
+
+  \begin{tabular}{| c | c || c | c || c | c |}
+  \hline
+\textbf{State} & \textbf{Total Tweets} & \textbf{State} & \textbf{Total Tweets} & \textbf{State} & \textbf{Total Tweets} \\
+\hline
+AL & 3422 & KY & 2445 & ND & 282 \\
+AK & 203 & LA & 2777 & OH & 7579 \\
+AZ & 2085 & ME & 449 & OK & 1568 \\
+AR & 771 & MD & 3379 & OR & 1084 \\
+CA & 12102 & MA & 3868 & PA & 7145 \\
+CO & 1309 & MI & 5919 & RI & 767 \\
+CT & 1711 & MN & 1778 & SC & 3161 \\
+DE & 681 & MS & 1111 & SD & 172 \\
+DC & 690 & MO & 1649 & TN & 3056 \\
+FL & 8548 & MT & 93 & TX & 11987 \\
+GA & 6222 & NE & 596 & UT & 755 \\
+HI & 279 & NV & 1015 & VT & 176 \\
+ID & 285 & NH & 557 & VA & 4618 \\
+IL & 4897 & NJ & 5828 & WA & 1997 \\
+IN & 3093 & NM & 531 & WV & 1129 \\
+IA & 1225 & NY & 10449 & WI & 1679 \\
+KS & 1328 & NC & 6025 & WY & 71 \\
+\hline
+\end{tabular}
+
+\chapter{Wikipedia Articles by State}
+  \begin{tabular}{| c | c || c | c || c | c |}
+  \hline
+\textbf{State} & \textbf{Total Articles} & \textbf{State} & \textbf{Total Articles} & \textbf{State} & \textbf{Total Articles} \\
+\hline
+AL & 2092 & KY & 1735 & ND & 980 \\
+AK & 1871 & LA & 1428 & OH & 3971 \\
+AZ & 1666 & ME & 1239 & OK & 1702 \\
+AR & 1273 & MD & 2423 & OR & 2792 \\
+CA & 10676 & MA & 3341 & PA & 6454 \\
+CO & 1921 & MI & 2989 & RI & 438 \\
+CT & 1462 & MN & 2762 & SC & 1447 \\
+DE & 515 & MS & 1069 & SD & 801 \\
+DC & 869 & MO & 2732 & TN & 1745 \\
+FL & 4263 & MT & 1405 & TX & 5620 \\
+GA & 2720 & NE & 1368 & UT & 1108 \\
+HI & 824 & NV & 822 & VT & 495 \\
+ID & 884 & NH & 938 & VA & 4132 \\
+IL & 4685 & NJ & 3997 & WA & 3341 \\
+IN & 3462 & NM & 1025 & WV & 919 \\
+IA & 1949 & NY & 8397 & WI & 2379 \\
+KS & 1622 & NC & 3248 & WY & 820 \\
+\hline
+\end{tabular}
+
+
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{sources}
